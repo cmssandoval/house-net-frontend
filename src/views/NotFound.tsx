@@ -1,12 +1,17 @@
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
 const NotFound = () => {
   return (
-    <Container className='not-found-component' fluid>
+    <Container fluid>
       <Row>
-        <Col className='p-5'>
-          <Card className='text-center gap-3 py-5'>
+        <Col className="p-0 col-sm-4 col-md-3 col-xl-2">
+            <Sidebar />
+        </Col>
+        <Col className='p-4 col-sm-8 col-md-9 col-xl-10'>
+            <h2 className="fw-bold ps-3 mb-4">Not Found</h2>
+          <Card className='card-custom text-center gap-3 p-4 m-3'>
             <Card.Title className='fw-bold'>Error 404</Card.Title>
 
             <Card.Text className='fw-bold'>No se ha encontrado la página que buscabas</Card.Text>
