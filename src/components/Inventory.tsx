@@ -35,7 +35,7 @@ const Inventory = () => {
   }, []);
 
   return (
-    <Col className="p-4 col-sm-8 col-md-9 col-xl-10">
+    <Col className="px-5 p-4 col-sm-8 col-md-9 col-xl-10">
       <Container className='mb-4 d-flex align-items-center gap-3'>
         <h2 className="fw-bold d-inline">Casa</h2>
         <TableFilters
