@@ -5,6 +5,12 @@ import Container from "react-bootstrap/Container";
 import CustomCard from '../components/CustomCard';
 
 const Home = () => {
+  const tasks = [
+    'Diseñar view de profile',
+    'Diseñar view de settings',
+    'Diseñar view de Casa',
+  ];
+
   return (
     <>
       <Container fluid>
@@ -16,10 +22,7 @@ const Home = () => {
             <h2 className="fw-bold ps-3 mb-4">Dashboard</h2>
             <Container>
               <Row>
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
+                <CustomCard title="Tareas pendientes" content={tasks} />
               </Row>
             </Container>
           </Col>
