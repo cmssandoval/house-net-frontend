@@ -2,7 +2,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sidebar from "../components/Sidebar";
 import Container from "react-bootstrap/Container";
-import CustomCard from '../components/CustomCard';
+import DashboardCard from '../components/DashboardCard';
 
 const Home = () => {
   const tasks = [
@@ -22,7 +22,7 @@ const Home = () => {
             <h2 className="fw-bold ps-3 mb-4">Dashboard</h2>
             <Container>
               <Row>
-                <CustomCard title="Tareas pendientes" content={tasks} />
+                <DashboardCard title="Tareas pendientes" content={tasks} />
               </Row>
             </Container>
           </Col>

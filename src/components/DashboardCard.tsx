@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 
-const CustomCard = ({
+const DashboardCard = ({
   title = 'Tareas pendientes',
   content = ['Tarea 1', 'Tarea 2']
 }) => {
@@ -21,4 +21,4 @@ const CustomCard = ({
   );
 };
 
-export default CustomCard;
+export default DashboardCard;
