@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,27 +12,35 @@ import type { Filtro, Item } from '../types/ComponentTypes';
 
 const filtros: Filtro[] = ['Todo', 'Comida', 'Aseo'];
 
-const inventarioInicial: Item[] = [
-  { id: 1, nombre: 'Té verde', categoria: 'Comida', cantidad: 4 },
-  { id: 2, nombre: 'Detergente', categoria: 'Aseo', cantidad: 2 },
-];
-
 const Casa = () => {
-  const [ filtro, setFiltro ] = useState<Filtro>('Todo');
-  const [ inventario, setInventario ] = useState<Item[]>(inventarioInicial);
+  const [filtro, setFiltro] = useState<Filtro>('Todo');
+  const [inventario, setInventario] = useState<Item[]>([]);
 
   const itemsMostrados =
     filtro === 'Todo'
       ? inventario
       : inventario.filter((item) => item.categoria === filtro);
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch('/test-data.json');
+        const data = await response.json();
+        setInventario(data);
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <>
       <Container fluid>
         <Row>
-          <Col className="p-0 col-sm-4 col-md-3 col-xl-2">
-            <Sidebar />
-          </Col>
+          <Sidebar />
           <Col className="p-4 col-sm-8 col-md-9 col-xl-10">
             <Container className='mb-4 d-flex align-items-center gap-3'>
               <h2 className="fw-bold d-inline">Casa</h2>

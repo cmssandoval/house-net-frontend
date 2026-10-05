@@ -6,11 +6,9 @@ const NotFound = () => {
   return (
     <Container fluid>
       <Row>
-        <Col className="p-0 col-sm-4 col-md-3 col-xl-2">
-            <Sidebar />
-        </Col>
+        <Sidebar />
         <Col className='p-4 col-sm-8 col-md-9 col-xl-10'>
-            <h2 className="fw-bold ps-3 mb-4">Not Found</h2>
+          <h2 className="fw-bold ps-3 mb-4">Not Found</h2>
           <Card className='card-custom text-center gap-3 p-4 m-3'>
             <Card.Title className='fw-bold'>Error 404</Card.Title>
 

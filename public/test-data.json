@@ -1,0 +1,17 @@
+[
+    { "id": 1, "nombre": "Té verde", "categoria": "Comida", "cantidad": 4 },
+    { "id": 2, "nombre": "Detergente", "categoria": "Aseo", "cantidad": 2 },
+    { "id": 3, "nombre": "Arroz", "categoria": "Comida", "cantidad": 1 },
+    { "id": 4, "nombre": "Azúcar", "categoria": "Comida", "cantidad": 2 },
+    { "id": 5, "nombre": "Suavizante", "categoria": "Aseo", "cantidad": 3 },
+    { "id": 6, "nombre": "Pimienta", "categoria": "Comida", "cantidad": 0 },
+    { "id": 7, "nombre": "Sal", "categoria": "Comida", "cantidad": 0 },
+    { "id": 8, "nombre": "Esponjas", "categoria": "Aseo", "cantidad": 3 },
+    { "id": 9, "nombre": "Fideos", "categoria": "Comida", "cantidad": 2 },
+    { "id": 10, "nombre": "Jabón", "categoria": "Aseo", "cantidad": 1 },
+    { "id": 11, "nombre": "Pasta de dientes", "categoria": "Aseo", "cantidad": 1 },
+    { "id": 12, "nombre": "Leche", "categoria": "Comida", "cantidad": 1 },
+    { "id": 13, "nombre": "Enjuague bucal", "categoria": "Aseo", "cantidad": 1 },
+    { "id": 14, "nombre": "Té negro", "categoria": "Comida", "cantidad": 1 },
+    { "id": 15, "nombre": "Pechuga de pollo", "categoria": "Comida", "cantidad": 1 }
+]
