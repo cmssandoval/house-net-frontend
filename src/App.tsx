@@ -1,6 +1,14 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./views/Home";
+import NotFound from "./views/NotFound";
+import './App.css';
+
 const App = () => {
   return (
-    <div>App</div>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 };
 
