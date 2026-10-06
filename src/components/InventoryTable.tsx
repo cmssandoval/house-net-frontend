@@ -11,8 +11,10 @@ const InventoryTable = ({ itemsMostrados }: InventoryTableProps) => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Imagen</th>
               <th>Producto</th>
               <th>Categoría</th>
+              <th>Ubicación</th>
               <th>Cantidad</th>
             </tr>
           </thead>
@@ -20,9 +22,11 @@ const InventoryTable = ({ itemsMostrados }: InventoryTableProps) => {
             {itemsMostrados.map((item: Item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
+                <td>{item.imagen_url}</td>
                 <td>{item.nombre}</td>
                 <td>{item.categoria}</td>
-                <td>{item.cantidad}</td>
+                <td>{item.ubicacion}</td>
+                <td>{item.stock}</td>
               </tr>
             ))}
           </tbody>

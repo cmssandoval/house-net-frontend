@@ -1,11 +1,14 @@
 export type Categoria = 'Comida' | 'Aseo';
-export type Filtro = 'Todo' | Categoria;
+export type Ubicacion = 'Cocina' | 'Despensa' | 'Baño';
+export type Filtro = 'Todo' | Categoria | Ubicacion;
 
 export interface Item {
     id: number;
+    imagen_url: string;
     nombre: string;
     categoria: Categoria;
-    cantidad: number;
+    ubicacion: Ubicacion;
+    stock: number;
 }
 
 export interface InventoryTableProps {
