@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 const InventoryTable = ({ itemsMostrados }: InventoryTableProps) => {
   return (
     <Row>
-      <Card className='card-custom'>
+      <Card className='p-2 card-custom'>
         <Table className='text-center'>
           <thead>
             <tr>

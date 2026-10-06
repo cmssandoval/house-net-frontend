@@ -16,10 +16,16 @@ const Home = () => {
       <Container fluid>
         <Row>
           <Sidebar />
-          <Col className="p-4 col-sm-8 col-md-9 col-xl-10">
-            <h2 className="fw-bold ps-3 mb-4">Dashboard</h2>
-            <Container>
+          <Col className="p-4 col-12 col-lg-9 col-xl-10">
+            <div className="px-3 pb-1">
+              <h2 className="mb-3 px-4 fw-bold">Dashboard</h2>
+
+            </div>
+            <Container className="px-4">
               <Row>
+                <DashboardCard title="Tareas pendientes" content={tasks} />
+                <DashboardCard title="Tareas pendientes" content={tasks} />
+                <DashboardCard title="Tareas pendientes" content={tasks} />
                 <DashboardCard title="Tareas pendientes" content={tasks} />
               </Row>
             </Container>

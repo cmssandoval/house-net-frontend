@@ -8,8 +8,8 @@ const DashboardCard = ({
   content = ['Tarea 1', 'Tarea 2']
 }) => {
   return (
-    <Col className="mt-4 col-xl-4 col-md-6">
-      <Card className="card-custom p-3">
+    <Col className="p-1 col-xl-4 col-md-6">
+      <Card className="card-custom p-4 m-2">
         <Card.Title className="fw-bold text-center">{title}</Card.Title>
         <ListGroup className="list-group-flush">
           {content.map( (item, index ) => (
