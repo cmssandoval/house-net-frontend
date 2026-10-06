@@ -18,6 +18,7 @@ const SearchForm = () => {
       <Form.Group className="d-flex gap-2">
         <Form.Control
           type="text"
+          name="search"
           placeholder="Nombre del producto"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
