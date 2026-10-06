@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 import TableFilters from './TableFilters';
 import InventoryTable from './InventoryTable';
+import SearchForm from './SearchForm';
 
 import type { Filtro, Item } from '../types/ComponentTypes';
 
@@ -35,14 +36,15 @@ const Inventory = () => {
   }, []);
 
   return (
-    <Col className="px-5 p-4 col-sm-8 col-md-9 col-xl-10">
-      <Container className='mb-4 d-flex align-items-center gap-3'>
+    <Col className="p-4 px-lg-5 col-12 col-lg-9 col-xl-10">
+      <Container className='mb-4 d-flex align-items-center gap-4'>
         <h2 className="fw-bold d-inline">Casa</h2>
         <TableFilters
           filtros={filtros}
           filtro={filtro}
           onChange={setFiltro}
         />
+        <SearchForm />
       </Container>
       <Container>
         <InventoryTable
@@ -50,7 +52,6 @@ const Inventory = () => {
         />
       </Container>
     </Col>
-
   );
 };
 
