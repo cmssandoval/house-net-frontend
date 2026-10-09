@@ -8,6 +8,7 @@ const InventoryTable = ({ itemsMostrados }: InventoryTableProps) => {
     <Row>
       <Card className='p-2 card-custom'>
         <Table className='text-center'>
+           {/* //! HACER RESPONSIVE CON CARD SCROLL, NO TOTAL SCROLL (OVERFLOW AUTO; TABLE RESPONSIVE) */}
           <thead>
             <tr>
               <th>ID</th>
