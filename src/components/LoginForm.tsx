@@ -88,7 +88,7 @@ const LoginForm = () => {
     <Col className="p-4 px-lg-5 col-12 col-lg-9 col-xl-10">
       <Container className='mb-4 d-flex flex-column align-items-center gap-4'>
         <h2 className="fw-bold d-inline">Login</h2>
-        <Card className='p-4 w-50 card-custom'>
+        <Card className='p-4 w-75 card-custom'>
           {loginSuccess && (
             <Alert variant="success" className="text-center">
               ¡Ingreso exitoso! Redirigiendo...
