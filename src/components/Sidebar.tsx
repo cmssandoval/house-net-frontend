@@ -20,12 +20,15 @@ const Sidebar = () => {
 
               <Nav.Link className="py-2" as={Link} to="/"          > Dashboard </Nav.Link>
               <Nav.Link className="py-2" as={Link} to="/casa"      > Casa </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/tareas"    > Tareas </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/proyectos" > Proyectos </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/recursos"  > Recursos </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/metas"     > Metas </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/notas"     > Notas </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/ajustes"   > Ajustes </Nav.Link>
+              {/* <Nav.Link className="py-2" as={Link} to="/tareas"    > Tareas </Nav.Link> */}
+              {/* <Nav.Link className="py-2" as={Link} to="/proyectos" > Proyectos </Nav.Link> */}
+              {/* <Nav.Link className="py-2" as={Link} to="/recursos"  > Recursos </Nav.Link> */}
+              {/* <Nav.Link className="py-2" as={Link} to="/metas"     > Metas </Nav.Link> */}
+              {/* <Nav.Link className="py-2" as={Link} to="/notas"     > Notas </Nav.Link> */}
+              {/* <Nav.Link className="py-2" as={Link} to="/ajustes"   > Ajustes </Nav.Link> */}
+              <Nav.Link className="text-info py-2" as={Link} to="/login"   > Login </Nav.Link>
+              <Nav.Link className="text-info py-2" as={Link} to="/register"   > Register </Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
