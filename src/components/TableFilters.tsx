@@ -1,24 +1,20 @@
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-
-import type { TableFiltersProps } from '../types/ComponentTypes';
+import Form from 'react-bootstrap/Form';
+import type { Filtro, TableFiltersProps } from '../types/ComponentTypes';
 
 const TableFilters = ({ filtros, filtro, onChange }: TableFiltersProps) => {
   return (
-    <ButtonGroup className='d-inline'>
-      {filtros.map((f) => (
-        <ToggleButton
-          key={f}
-          id={`radio-${f}`}
-          type="radio"
-          variant='outline-secondary'
-          name="filtro"
-          value={f}
-          checked={filtro === f}
-          onChange={() => onChange(f)}
-        > {f} </ToggleButton>
+    <Form.Select
+      value={ filtro }
+      onChange={( event ) => onChange( event.target.value as Filtro )}
+      className="d-inline w-auto"
+      aria-label="Seleccionar filtro"
+    >
+      {filtros.map(( filtro ) => (
+        <option key={ filtro } value={ filtro }>
+          { filtro }
+        </option>
       ))}
-    </ButtonGroup>
+    </Form.Select>
   );
 };
 
