@@ -7,16 +7,15 @@ const InventoryTable = ({ itemsMostrados }: InventoryTableProps) => {
   return (
     <Row>
       <Card className='p-2 card-custom'>
-        <Table className='text-center'>
-           {/* //! HACER RESPONSIVE CON CARD SCROLL, NO TOTAL SCROLL (OVERFLOW AUTO; TABLE RESPONSIVE) */}
+        <Table responsive className='text-center'>
           <thead>
             <tr>
               <th>ID</th>
               <th>Imagen</th>
-              <th>Producto</th>
+              <th>Nombre</th>
               <th>Categoría</th>
               <th>Ubicación</th>
-              <th>Cantidad</th>
+              <th>Stock</th>
             </tr>
           </thead>
           <tbody>
