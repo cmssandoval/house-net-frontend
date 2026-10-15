@@ -8,7 +8,7 @@ const DashboardCard = ({
   content = ['Tarea 1', 'Tarea 2']
 }) => {
   return (
-    <Col className="p-1 col-xl-4 col-md-6">
+    <Col sm={12} md={6} xl={4} className="p-0">
       <Card className="card-custom p-4 m-2">
         <Card.Title className="fw-bold text-center">{title}</Card.Title>
         <ListGroup className="list-group-flush">
