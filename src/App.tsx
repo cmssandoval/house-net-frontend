@@ -6,6 +6,7 @@ import Casa from "./views/Casa.tsx";
 import NotFound from "./views/NotFound.tsx";
 import Login from "./views/Login.tsx";
 import Register from "./views/Register.tsx";
+import Camera from "./views/Camera.tsx";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path='/casa' element={<Casa />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/camara' element={<Camera />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
