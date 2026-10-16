@@ -105,7 +105,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Col className="p-4 px-lg-5 col-12 col-lg-9 col-xl-10">
+    <Col className="p-4 pb-0 px-lg-5 col-12 col-lg-9 col-xl-10">
       <Container className='mb-4 d-flex flex-column align-items-center gap-4'>
         <h2 className="fw-bold d-inline">Register</h2>
         <Card className='p-4 w-75 card-custom'>
