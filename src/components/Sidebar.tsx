@@ -20,7 +20,7 @@ const Sidebar = () => {
 
               <Nav.Link className="py-2" as={Link} to="/"          > Dashboard </Nav.Link>
               <Nav.Link className="py-2" as={Link} to="/casa"      > Casa </Nav.Link>
-              <Nav.Link className="py-2" as={Link} to="/camara"      > Cámara </Nav.Link>
+              {/* <Nav.Link className="py-2" as={Link} to="/camara"      > Cámara </Nav.Link> */}
               {/* <Nav.Link className="py-2" as={Link} to="/tareas"    > Tareas </Nav.Link> */}
               {/* <Nav.Link className="py-2" as={Link} to="/proyectos" > Proyectos </Nav.Link> */}
               {/* <Nav.Link className="py-2" as={Link} to="/recursos"  > Recursos </Nav.Link> */}
