@@ -13,7 +13,7 @@ const CameraData = () => {
       <Container className="px-2">
         <Row>
           <Card className='p-2 card-custom'>
-            <img src="/api/camera/" alt="Stream V4L2" />
+            <img src="/api/camera/stream/" alt="Stream V4L2" />
           </Card>
         </Row>
       </Container>
