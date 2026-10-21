@@ -7,6 +7,7 @@ import InventoryTable from '../components/InventoryTable';
 import SearchForm from '../components/SearchForm';
 
 import type { Filter, Item } from '../types/inventory.ts';
+import AddProductModal from '../components/AddProductModal.tsx';
 
 const filters: Filter[] = ['Todo', 'Comida', 'Aseo'];
 
@@ -45,6 +46,7 @@ const Inventory = () => {
         />
         <Container className='d-flex justify-content-around gap-3'>
           <SearchForm />
+          <AddProductModal />
         </Container>
       </Container>
       <Container>
