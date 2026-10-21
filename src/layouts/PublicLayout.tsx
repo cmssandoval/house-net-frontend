@@ -1,8 +1,10 @@
+import { Outlet } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Outlet } from 'react-router-dom';
-const AuthLayout = () => {
+
+const PublicLayout = () => {
   return (
     <Container fluid>
       <Row>
@@ -14,4 +16,4 @@ const AuthLayout = () => {
   );
 };
 
-export default AuthLayout;
+export default PublicLayout;

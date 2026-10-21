@@ -1,8 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
+
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
+
+import Sidebar from '@/components/Sidebar';
+
 const MainLayout = () => {
   return (
     <Container fluid>
