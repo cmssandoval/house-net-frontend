@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { loginSchema, type LoginFormData } from '../schemas/login';
-import type { FormErrors } from '../types/forms';
+import { loginSchema, type LoginFormData } from '@/schemas/login';
+import type { FormErrors } from '@/types/forms.ts';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -17,7 +17,6 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const [ formData, setFormData ] = useState<LoginFormData>({
     email: '',
     password: '',
-    role: 'usuario',
   });
 
   const [ errors, setErrors ] = useState<FormErrors<LoginFormData>>({});
@@ -63,10 +62,10 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
     try {
       await onSubmit(formData);
       setLoginSuccess(true);
-      setFormData({ email: '', password: '', role: 'usuario', });
+      // setFormData({ email: '', password: '', role: 'usuario' });
       setErrors({});
-    } catch {
-      setGlobalError('Credenciales incorrectas. Por favor, intenta de nuevo.');
+    } catch (err) {
+      setGlobalError(err instanceof Error ? err.message : 'Error');
     } finally {
       setIsLoading(false);
     }
@@ -119,24 +118,6 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
               />
               <Form.Control.Feedback type="invalid">
                 {errors.password}
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicSelect">
-              <Form.Label>Tipo de Cuenta</Form.Label>
-              <Form.Select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                isInvalid={!!errors.role}
-                disabled={isLoading}
-              >
-                <option value="usuario">Usuario</option>
-                <option value="admin">Administrador</option>
-                <option value="invitado">Invitado</option>
-              </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {errors.role}
               </Form.Control.Feedback>
             </Form.Group>
 

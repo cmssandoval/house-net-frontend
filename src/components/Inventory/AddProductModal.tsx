@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import type { Category, Location } from '../types/inventory.ts';
-import type { FormErrors } from '../types/forms.ts';
-import { addProduct, type AddProductFormData } from '../schemas/addProduct.ts';
+
+import type { Category, Location } from '@/types/inventory.ts';
+import type { FormErrors } from '@/types/forms.ts';
+import { addProduct, type AddProductFormData } from '@/schemas/addProduct.ts';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

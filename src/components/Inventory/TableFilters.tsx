@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import type { Filter, TableFiltersProps } from '../types/inventory.ts';
+import type { Filter, TableFiltersProps } from '@/types/inventory.ts';
 
 const TableFilters = ({ filters, filter, onChange }: TableFiltersProps) => {
   return (

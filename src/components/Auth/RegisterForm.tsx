@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { registerSchema, type RegisterFormData } from '../schemas/register.ts';
+
+import type { FormErrors } from '@/types/forms.ts';
+import { registerSchema, type RegisterFormData } from '@/schemas/register.ts';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,7 +10,6 @@ import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import type { FormErrors } from '../types/forms.ts';
 
 type RegisterFormProps = { onSubmit: ( data: RegisterFormData ) => Promise<void> };
 

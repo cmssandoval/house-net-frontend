@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import TaskCard from '../components/TaskCard.tsx';
+import TaskCard from '@/components/TaskCard.tsx';
 
 const Tasks = () => {
   const tasks = [

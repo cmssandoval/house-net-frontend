@@ -1,5 +1,5 @@
-import RegisterForm from "../components/RegisterForm.tsx";
-import type { RegisterFormData } from "../schemas/register.ts";
+import RegisterForm from "@/components/Auth/RegisterForm";
+import type { RegisterFormData } from "@/schemas/register.ts";
 
 const Register = () => {
   const handleRegister = async ( data: RegisterFormData ) => {

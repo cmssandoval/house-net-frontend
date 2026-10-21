@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
-import TableFilters from '../components/TableFilters';
-import InventoryTable from '../components/InventoryTable';
-import SearchForm from '../components/SearchForm';
+import TableFilters from '@/components/Inventory/TableFilters';
+import InventoryTable from '@/components/Inventory/InventoryTable';
+import SearchForm from '@/components/Inventory/SearchForm';
 
-import type { Filter, Item } from '../types/inventory.ts';
-import AddProductModal from '../components/AddProductModal.tsx';
+import type { Filter, Item } from '@/types/inventory.ts';
+import AddProductModal from '@/components/Inventory/AddProductModal';
 
 const filters: Filter[] = ['Todo', 'Comida', 'Aseo'];
 

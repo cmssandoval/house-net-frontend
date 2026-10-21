@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import './App.css';
+import '@/App.css';
 
 import { AuthProvider } from "@/contexts/AuthContext.tsx";
 import ProtectedRoute from "@/views/ProtectedRoute.tsx";
@@ -17,7 +17,7 @@ import Dashboard from "@/views/Auth/Dashboard.tsx";
 import Inventory from "@/views/Auth/Inventory.tsx";
 import Tasks from '@/views/Auth/Tasks.tsx';
 import Camera from "@/views/Auth/Camera.tsx";
-import Admin from "@/views/Admin.tsx";
+import Admin from "@/views/Admin/Admin.tsx";
 
 const App = () => {
   return (

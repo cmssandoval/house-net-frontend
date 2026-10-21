@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import type { InventoryTableProps, Item } from '../types/inventory.ts';
 import Row from 'react-bootstrap/Row';
+import type { InventoryTableProps, Item } from '@/types/inventory.ts';
 
 const InventoryTable = ({ shownItems }: InventoryTableProps) => {
   return (

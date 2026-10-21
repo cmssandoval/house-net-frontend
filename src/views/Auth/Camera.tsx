@@ -1,4 +1,4 @@
-import CameraData from '../components/CameraData';
+import CameraData from '@/components/CameraData';
 
 const Camera = () => {
   return (
