@@ -1,53 +1,88 @@
 import { useState } from 'react';
+import type { Category, Location } from '../types/inventory.ts';
+import type { FormErrors } from '../types/forms.ts';
+import { addProduct, type AddProductFormData } from '../schemas/addProduct.ts';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import type { Category, Location } from '../types/inventory.ts';
-
-type CategoryState = Category | 'Categoría';
-type LocationState = Location | 'Ubicación';
 
 const categories: Category[] = ['Comida', 'Aseo'];
 const locations: Location[] = ['Cocina', 'Despensa', 'Baño'];
 
 function AddProductModal() {
-  const [ productName, setProductName ] = useState<string>('');
-  const [ category, setCategory ] = useState<CategoryState>('Categoría');
-  const [ location, setLocation ] = useState<LocationState>('Ubicación');
-  const [ stock, setStock ] = useState<string>('');
-  const [ unit, setUnit ] = useState<string>('');
+  const [ formData, setFormData ] = useState<AddProductFormData>({
+    productName: '',
+    category: 'Categoría',
+    location: 'Ubicación',
+    stock: '',
+    unit: '',
+  });
+
   const [ show, setShow ] = useState<boolean>(false);
+  const [ errors, setErrors ] = useState<FormErrors<AddProductFormData>>({});
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const name = event.target.name as keyof AddProductFormData;
+    const value = event.target.value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
 
   const handleClose = (): void => {
     setShow(false);
-    handleCleanup();
   };
 
   const handleShow = (): void => {
     setShow(true);
+  };
+
+  const handleDiscardDataClose = () => {
+    setShow(false);
+    setErrors({});
     handleCleanup();
   };
 
   const handleCleanup = (): void => {
-    setProductName('');
-    setCategory('Categoría');
-    setLocation('Ubicación');
-    setStock('');
-    setUnit('');
+    setFormData({
+      productName: '',
+      category: 'Categoría',
+      location: 'Ubicación',
+      stock: '',
+      unit: '',
+    });
   };
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const result = addProduct.safeParse(formData);
+
+    if (!result.success) {
+      const formattedErrors: FormErrors<AddProductFormData> = {};
+
+      result.error.issues.forEach((issue) => {
+        const path = issue.path[0] as keyof AddProductFormData;
+        formattedErrors[path] = issue.message;
+      });
+
+      setErrors(formattedErrors);
+      return;
+    }
+
     try {
       const data = {
-        productName,
-        category,
-        location,
-        stock: Number(stock),
-        unit,
+        ...formData,
+        stock: Number(formData.stock),
       };
-      console.log(data);
-      console.log(JSON.stringify(data));
+      
       const response = await fetch('http://localhost:3000/api/inventory/', {
         method: 'POST',
         headers: {
@@ -55,13 +90,19 @@ function AddProductModal() {
         },
         body: JSON.stringify(data)
       });
-      console.log(response);
-      
-    } catch (error) {
-      console.log(error);
-    }
 
-    handleClose();
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      setErrors({});
+      alert('Producto ingresado con éxito');
+    } catch (error) {
+      alert('Error al ingresar datos del producto');
+      console.log(error);
+    } finally {
+      handleDiscardDataClose();
+    }
   };
 
   return (
@@ -71,7 +112,7 @@ function AddProductModal() {
       </Button>
 
       <Modal show={show} onHide={handleClose} scrollable>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Añade un producto</Modal.Title>
         </Modal.Header>
 
@@ -83,18 +124,22 @@ function AddProductModal() {
                   type="text"
                   name="productName"
                   placeholder="Nombre"
-                  value={productName}
-                  onChange={(event) => setProductName(event.target.value)}
-                  required
+                  value={formData.productName}
+                  onChange={handleChange}
+                  isInvalid={!!errors.productName}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.productName}
+                </Form.Control.Feedback>
 
               </div>
               <div className='d-flex gap-5'>
                 <Form.Select
-                  value={category}
-                  onChange={(event) => setCategory(event.target.value as Category)}
-                  className="shadow-sm"
                   aria-label="Seleccionar categoría"
+                  className="shadow-sm"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
                 >
                   <option value="Categoría" disabled hidden>
                     Categoría
@@ -106,10 +151,11 @@ function AddProductModal() {
                   ))}
                 </Form.Select>
                 <Form.Select
-                  value={location}
-                  onChange={(event) => setLocation(event.target.value as Location)}
-                  className="shadow-sm"
                   aria-label="Seleccionar ubicación"
+                  className="shadow-sm"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
                 >
                   <option value="Ubicación" disabled hidden>
                     Ubicación
@@ -121,32 +167,39 @@ function AddProductModal() {
                   ))}
                 </Form.Select>
               </div>
-              <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content-between gap-5'>
                 <div className='d-flex flex-column'>
                   <Form.Label>Stock</Form.Label>
                   <Form.Control
-                    value={stock}
+                    aria-label="Stock"
+                    className="shadow-sm"
+                    name="stock"
                     type='number'
                     placeholder='Ej: 0-100'
-                    onChange={(event) => setStock(event.target.value)}
-                    className=" shadow-sm"
-                    aria-label="Stock"
-                    required
-                  >
-                  </Form.Control>
+                    value={formData.stock}
+                    onChange={handleChange}
+                    isInvalid={!!errors.stock}
+                  />
+                <Form.Control.Feedback type="invalid">
+                  {errors.stock}
+                </Form.Control.Feedback>                  
 
                 </div>
                 <div className='d-flex flex-column'>
                   <Form.Label>Unidad</Form.Label>
                   <Form.Control
-                    value={unit}
-                    placeholder='Ej: Caja/Bolsa/Botella'
-                    onChange={(event) => setUnit(event.target.value)}
-                    className="mx-auto shadow-sm"
                     aria-label="Unidad"
-                    required
-                  >
-                  </Form.Control>
+                    className="shadow-sm"
+                    name="unit"
+                    type='text'
+                    value={formData.unit}
+                    placeholder='Ej: Caja/Bolsa/Botella'
+                    onChange={handleChange}
+                    isInvalid={!!errors.unit}
+                  />
+                <Form.Control.Feedback type="invalid">
+                  {errors.unit}
+                </Form.Control.Feedback>  
                 </div>
               </div>
             </Form.Group>
@@ -154,8 +207,11 @@ function AddProductModal() {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancelar
+          <Button variant="danger" onClick={handleDiscardDataClose}>
+            Descartar
+          </Button>
+          <Button variant="warning" onClick={handleClose}>
+            Guardar borrador
           </Button>
           <Button variant="success" type="submit" form="modalForm">
             Añadir Producto
