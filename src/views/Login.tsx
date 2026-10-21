@@ -1,18 +1,13 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-
-import Sidebar from "../components/Sidebar.tsx";
 import LoginForm from "../components/LoginForm.tsx";
+import type { LoginFormData } from "../schemas/login.ts";
 
 const Login = () => {
-    return (
-      <Container fluid>
-        <Row>
-          <Sidebar />
-          <LoginForm />
-        </Row>
-      </Container>
-    );
+    const handleLogin = async ( data: LoginFormData ) => {
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        console.log(data);
+    };
+
+    return <LoginForm onSubmit={handleLogin} />;
 };
 
 export default Login;

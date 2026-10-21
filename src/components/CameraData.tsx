@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 const CameraData = () => {
 
   return (
-
     <Col sm={12} lg={9} xl={10} className="p-4">
       <div className="px-3 pb-1">
         <h2 className="mb-3 px-4 fw-bold">Camara</h2>

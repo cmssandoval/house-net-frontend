@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { z } from 'zod';
+import { registerSchema, type RegisterFormData } from '../schemas/register.ts';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,31 +8,11 @@ import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import type { FormErrors } from '../types/forms.ts';
 
-const registerSchema = z.object({
-  fullName: z
-    .string()
-    .min(3, 'El nombre debe tener al menos 3 caracteres')
-    .max(50, 'El nombre es demasiado largo'),
-  email: z
-    .email({ message: 'El formato del correo electrónico no es válido' }),
-  password: z
-    .string()
-    .min(8, 'La contraseña debe tener al menos 8 caracteres')
-    .regex(/[A-Z]/, 'Debe incluir al menos una letra mayúscula')
-    .regex(/[0-9]/, 'Debe incluir al menos un número'),
-  confirmPassword: z
-    .string()
-    .min(1, 'Debes confirmar tu contraseña'),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Las contraseñas no coinciden',
-  path: ['confirmPassword'],
-});
+type RegisterFormProps = { onSubmit: ( data: RegisterFormData ) => Promise<void> };
 
-type RegisterFormData = z.infer<typeof registerSchema>;
-type FormErrors = Partial<Record<keyof RegisterFormData, string>>;
-
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   const [formData, setFormData] = useState<RegisterFormData>({
     fullName: '',
     email: '',
@@ -40,7 +20,7 @@ const RegisterForm = () => {
     confirmPassword: '',
   });
 
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<FormErrors<RegisterFormData>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [globalError, setGlobalError] = useState('');
@@ -79,7 +59,7 @@ const RegisterForm = () => {
     const result = registerSchema.safeParse(formData);
 
     if (!result.success) {
-      const formattedErrors: FormErrors = {};
+      const formattedErrors: FormErrors<RegisterFormData> = {};
 
       result.error.issues.forEach((issue) => {
         const path = issue.path[0] as keyof RegisterFormData;
@@ -93,7 +73,7 @@ const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await onSubmit(formData);
       setRegisterSuccess(true);
       setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
       setErrors({});

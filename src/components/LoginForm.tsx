@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { z } from 'zod';
+import { loginSchema, type LoginFormData } from '../schemas/login';
+import type { FormErrors } from '../types/forms';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -9,36 +10,23 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 
-const loginSchema = z.object({
-  email: z
-    .email('El formato del correo electrónico no es válido'),
-  password: z
-    .string()
-    .min(8, 'La contraseña debe tener al menos 8 caracteres')
-    .max(20, 'La contraseña no puede superar los 20 caracteres'),
-  role: z.enum(['usuario', 'admin', 'invitado'], {
-    error: 'Selecciona un rol válido',
-  }),
-});
+type LoginFormProps = { onSubmit: ( data: LoginFormData ) => Promise<void> };
 
-type FormDataState = z.infer<typeof loginSchema>;
-type FormErrors = Partial<Record<keyof FormDataState, string>>;
+const LoginForm = ({ onSubmit }: LoginFormProps) => {
 
-const LoginForm = () => {
-
-  const [ formData, setFormData ] = useState<FormDataState>({
+  const [ formData, setFormData ] = useState<LoginFormData>({
     email: '',
     password: '',
     role: 'usuario',
   });
 
-  const [ errors, setErrors ] = useState<FormErrors>({});
+  const [ errors, setErrors ] = useState<FormErrors<LoginFormData>>({});
   const [ isLoading, setIsLoading ] = useState(false);
   const [ loginSuccess, setLoginSuccess ] = useState(false);
   const [ globalError, setGlobalError ] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const name = event.target.name as keyof FormDataState;
+    const name = event.target.name as keyof LoginFormData;
     const value = event.target.value;
 
     setFormData((prev) => ({
@@ -59,10 +47,10 @@ const LoginForm = () => {
     const result = loginSchema.safeParse(formData);
 
     if (!result.success) {
-      const formattedErrors: FormErrors = {};
+      const formattedErrors: FormErrors<LoginFormData> = {};
 
       result.error.issues.forEach((issue) => {
-        const path = issue.path[0] as keyof FormDataState;
+        const path = issue.path[0] as keyof LoginFormData;
         formattedErrors[path] = issue.message;
       });
 
@@ -73,7 +61,7 @@ const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await onSubmit(formData);
       setLoginSuccess(true);
       setFormData({ email: '', password: '', role: 'usuario', });
       setErrors({});

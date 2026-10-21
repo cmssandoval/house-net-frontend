@@ -1,6 +1,6 @@
-import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const SearchForm = () => {
 
@@ -14,8 +14,8 @@ const SearchForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="d-flex gap-2">
+    <Form onSubmit={handleSubmit} className="w-100">
+      <Form.Group className="d-flex gap-2 shadow-sm">
         <Form.Control
           type="text"
           name="search"
