@@ -169,11 +169,12 @@ function AddProductModal() {
               </div>
               <div className='d-flex justify-content-between gap-5'>
                 <div className='d-flex flex-column'>
-                  <Form.Label>Stock</Form.Label>
+                  <Form.Label htmlFor='stock'>Stock</Form.Label>
                   <Form.Control
                     aria-label="Stock"
                     className="shadow-sm"
                     name="stock"
+                    id="stock"
                     type='number'
                     placeholder='Ej: 0-100'
                     value={formData.stock}
@@ -186,11 +187,12 @@ function AddProductModal() {
 
                 </div>
                 <div className='d-flex flex-column'>
-                  <Form.Label>Unidad</Form.Label>
+                  <Form.Label htmlFor='unit'>Unidad</Form.Label>
                   <Form.Control
                     aria-label="Unidad"
                     className="shadow-sm"
                     name="unit"
+                    id="unit"
                     type='text'
                     value={formData.unit}
                     placeholder='Ej: Caja/Bolsa/Botella'

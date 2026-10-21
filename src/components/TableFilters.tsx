@@ -4,6 +4,7 @@ import type { Filter, TableFiltersProps } from '../types/inventory.ts';
 const TableFilters = ({ filters, filter, onChange }: TableFiltersProps) => {
   return (
     <Form.Select
+      name='filter'
       value={ filter }
       onChange={( event ) => onChange( event.target.value as Filter )}
       className="d-inline w-auto shadow-sm"
