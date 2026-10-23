@@ -19,6 +19,7 @@ import Tasks from '@/views/Auth/Tasks.tsx';
 import Camera from "@/views/Auth/Camera.tsx";
 import Admin from "@/views/Admin/Admin.tsx";
 import PublicRoute from "./views/PublicRoute";
+import PublicResources from "./views/Public/PublicResources";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/public-resources' element={<PublicResources />} />
           </Route>
         </Route>
 
@@ -49,6 +51,7 @@ const App = () => {
         </Route>
         
         <Route path='*' element={<NotFound />} />
+        
       </Routes>
     </AuthProvider>
   );

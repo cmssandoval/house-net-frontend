@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { loginSchema, type LoginFormData } from '@/schemas/login';
 import type { FormErrors } from '@/types/forms.ts';
 
-import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -74,73 +73,71 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
   };
 
   return (
-    <Col className="p-4 px-lg-5 col-12 col-lg-9 col-xl-10">
-      <Container className='mb-4 d-flex flex-column align-items-center gap-4'>
-        <h2 className="fw-bold d-inline">Login</h2>
-        <Card className='p-4 w-75 card-custom'>
-          {loginSuccess && (
-            <Alert variant="success" className="text-center">
-              ¡Ingreso exitoso! Redirigiendo...
-            </Alert>
-          )}
-          {globalError && (
-            <Alert variant="danger" className="text-center">
-              {globalError}
-            </Alert>
-          )}
+    <Container className='d-flex flex-column align-items-center gap-4'>
+      <Card className='p-4 w-75 card-custom'>
+        <h2 className="pb-3 fw-bold d-inline">Iniciar Sesión</h2>
+        {loginSuccess && (
+          <Alert variant="success" className="text-center">
+            ¡Ingreso exitoso! Redirigiendo...
+          </Alert>
+        )}
+        {globalError && (
+          <Alert variant="danger" className="text-center">
+            {globalError}
+          </Alert>
+        )}
 
-          <Form onSubmit={handleSubmit} noValidate>
+        <Form onSubmit={handleSubmit} noValidate>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Correo Electrónico</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="ejemplo@correo.com"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                isInvalid={!!errors.email}
-                disabled={isLoading}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.email}
-              </Form.Control.Feedback>
-            </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Correo Electrónico</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="ejemplo@correo.com"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              isInvalid={!!errors.email}
+              disabled={isLoading}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Ingresa tu contraseña"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                isInvalid={!!errors.password}
-                disabled={isLoading}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.password}
-              </Form.Control.Feedback>
-            </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Ingresa tu contraseña"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              isInvalid={!!errors.password}
+              disabled={isLoading}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100 mt-3" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Spinner as="span" animation="border" size="sm" role="status" className="me-2" />
-                  Autenticando...
-                </>
-              ) : (
-                'Ingresar'
-              )}
-            </Button>
-            
-          </Form>
+          <Button variant="dark" type="submit" className="w-100 mt-3" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Spinner as="span" animation="border" size="sm" role="status" className="me-2" />
+                Autenticando...
+              </>
+            ) : (
+              'Ingresar'
+            )}
+          </Button>
           
-          <p className='mt-4 text-center'>¿Aún no tienes cuenta? <Link to={'/register'}>Regístrate</Link></p>
+        </Form>
+        
+        <p className='mt-4 text-center'>¿Aún no tienes cuenta? <Link to={'/register'}>Regístrate</Link></p>
 
-        </Card>
-      </Container>
-    </Col>
+      </Card>
+    </Container>
   );
 };
 

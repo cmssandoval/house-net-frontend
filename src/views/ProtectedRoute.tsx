@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext.ts';
-
-import Spinner from 'react-bootstrap/Spinner';
+import LoadingScreen from '@/components/LoadingScreen';
 
 interface ProtectedRouteProps {
   allowedRoles?: string[]
@@ -11,11 +10,11 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
   const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) {
-    return <div><h3>Cargando...</h3><Spinner /></div>;
+    return <LoadingScreen />;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (allowedRoles && (!user?.role || !allowedRoles.includes(user?.role))) {
