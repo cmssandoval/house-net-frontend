@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext.tsx';
+import { useAuth } from '@/contexts/AuthContext.ts';
 
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading, userRole } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) {
     return <div><h3>Cargando...</h3><Spinner /></div>;
@@ -18,7 +18,7 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles && (!userRole || !allowedRoles.includes(userRole))) {
+  if (allowedRoles && (!user?.role || !allowedRoles.includes(user?.role))) {
     return <Navigate to="/tablero" replace />; 
   }
 

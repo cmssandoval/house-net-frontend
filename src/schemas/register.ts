@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const registerSchema = z.object({
+export const registerSubmitSchema = z.object({
   fullName: z
     .string()
     .min(3, 'El nombre debe tener al menos 3 caracteres')
@@ -20,4 +20,14 @@ export const registerSchema = z.object({
   path: ['confirmPassword'],
 });
 
+export const registerSchema = registerSubmitSchema.safeExtend({
+  confirmPassword: z
+    .string()
+    .min(1, 'Debes confirmar tu contraseña'),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Las contraseñas no coinciden',
+  path: ['confirmPassword'],
+});
+
 export type RegisterFormData = z.infer<typeof registerSchema>;
+export type RegisterSubmitData = z.infer<typeof registerSubmitSchema>;

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import '@/App.css';
 
-import { AuthProvider } from "@/contexts/AuthContext.tsx";
+import { AuthProvider } from "@/contexts/AuthProvider.tsx";
 import ProtectedRoute from "@/views/ProtectedRoute.tsx";
 
 import PublicLayout from '@/layouts/PublicLayout.tsx';
@@ -18,17 +18,19 @@ import Inventory from "@/views/Auth/Inventory.tsx";
 import Tasks from '@/views/Auth/Tasks.tsx';
 import Camera from "@/views/Auth/Camera.tsx";
 import Admin from "@/views/Admin/Admin.tsx";
+import PublicRoute from "./views/PublicRoute";
 
 const App = () => {
   return (
     <AuthProvider>
       <Routes>
 
-        <Route element={<PublicLayout />}>
-          <Route index element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='*' element={<NotFound />} />
+        <Route element={<PublicRoute />}>
+          <Route element={<PublicLayout />}>
+            <Route index element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Route>
         </Route>
 
         <Route element={<ProtectedRoute />}>
@@ -45,7 +47,8 @@ const App = () => {
             <Route path='/admin' element={<Admin />} />
           </Route>
         </Route>
-
+        
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );

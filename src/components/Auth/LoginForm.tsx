@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { loginSchema, type LoginFormData } from '@/schemas/login';
 import type { FormErrors } from '@/types/forms.ts';
 
@@ -9,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
+import { Link } from 'react-router-dom';
 
 type LoginFormProps = { onSubmit: ( data: LoginFormData ) => Promise<void> };
 
@@ -134,6 +136,8 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
             
           </Form>
           
+          <p className='mt-4 text-center'>¿Aún no tienes cuenta? <Link to={'/register'}>Regístrate</Link></p>
+
         </Card>
       </Container>
     </Col>

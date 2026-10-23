@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import type { FormErrors } from '@/types/forms.ts';
-import { registerSchema, type RegisterFormData } from '@/schemas/register.ts';
+import { registerSchema } from '@/schemas/register.ts';
+import type { RegisterFormData, RegisterSubmitData } from '@/schemas/register.ts';
 
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -10,10 +11,12 @@ import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { Link } from 'react-router-dom';
 
-type RegisterFormProps = { onSubmit: ( data: RegisterFormData ) => Promise<void> };
+type RegisterFormProps = { onSubmit: ( data: RegisterSubmitData ) => Promise<void> };
 
 const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
+
   const [formData, setFormData] = useState<RegisterFormData>({
     fullName: '',
     email: '',
@@ -30,25 +33,13 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
     const name = event.target.name as keyof RegisterFormData;
     const value = event.target.value;
 
-    const updatedData = {
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    };
+    }));
 
-    setFormData(updatedData);
-
-    const result = registerSchema.safeParse(updatedData);
-    if (!result.success) {
-      const fieldError = result.error.issues.find((issue) => issue.path[0] === name);
-      setErrors((prev) => ({
-        ...prev,
-        [name]: fieldError ? fieldError.message : undefined,
-        ...(name === 'password' || name === 'confirmPassword'
-          ? { confirmPassword: result.error.issues.find((i) => i.path[0] === 'confirmPassword')?.message }
-          : {}),
-      }));
-    } else {
-      setErrors({});
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
@@ -73,13 +64,16 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
 
     setIsLoading(true);
 
+    const submitData: Partial<RegisterFormData> = { ...formData };
+    delete submitData.confirmPassword; 
+
     try {
-      await onSubmit(formData);
+      await onSubmit(submitData as RegisterSubmitData);
       setRegisterSuccess(true);
-      setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+      // setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
       setErrors({});
-    } catch {
-      setGlobalError('El correo electrónico ya se encuentra registrado.');
+    } catch (err){
+      setGlobalError(err instanceof Error ? err.message : 'Error');
     } finally {
       setIsLoading(false);
     }
@@ -179,6 +173,9 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
               )}
             </Button>
           </Form>
+
+          <p className='mt-4 text-center'>¿Ya tienes cuenta? <Link to={'/login'}>Inicia Sesión</Link></p>
+          
         </Card>
       </Container>
     </Col>

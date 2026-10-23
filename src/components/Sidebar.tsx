@@ -3,9 +3,10 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import { useAuth } from "@/contexts/AuthContext.ts";
 
 const Sidebar = () => {
-  const token = undefined;
+  const { user, logout } = useAuth();
 
   return (
     <Col xs={12} lg={3} xl={3} className="py-3 px-0 min-vh-lg-100 nav-list">
@@ -31,7 +32,7 @@ const Sidebar = () => {
               {/* <Nav.Link className="px-4 fs-5" as={Link} to="/notas"     > Notas </Nav.Link> */}
               {/* <Nav.Link className="px-4 fs-5" as={Link} to="/ajustes"   > Ajustes </Nav.Link> */}
 
-              {!token && <Nav.Link className="text-danger fw-bold px-4 fs-5" as={Link} to="/logout"   > Logout </Nav.Link>}
+              {user && <Nav.Link className="text-danger fw-bold px-4 fs-5" onClick={logout}> Logout </Nav.Link>}
             </Nav>
           </Navbar.Collapse>
         </Container>

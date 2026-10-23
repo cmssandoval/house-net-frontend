@@ -1,7 +1,7 @@
-import { useAuth } from "@/contexts/AuthContext.tsx";
+import { useAuth } from "@/contexts/AuthContext.ts";
 import { useNavigate } from "react-router-dom";
 
-import LoginForm from "@/components/Auth/LoginForm";
+import LoginForm from "@/components/Auth/LoginForm.tsx";
 import type { LoginFormData } from "@/schemas/login.ts";
 
 const Login = () => {
@@ -14,6 +14,7 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(data)
       });
 
@@ -22,8 +23,7 @@ const Login = () => {
         throw new Error(body?.message ?? 'Credenciales incorrectas. Por favor, intenta de nuevo.');
       }
 
-      const { token } = await response.json();
-      login(token);
+      await login();
       navigate('/tablero', { replace: true });
 
   };
