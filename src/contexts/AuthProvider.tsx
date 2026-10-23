@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/auth/me', {
+        const response = await fetch('/api/auth/me', {
           method: 'GET',
           credentials: 'include',
         });
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async () => {
     setAuthState((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await fetch('http://localhost:3000/api/auth/me',{
+      const response = await fetch('/api/auth/me',{
         credentials: 'include',
       });
 
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:3000/api/auth/logout', {
+      await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
       });
