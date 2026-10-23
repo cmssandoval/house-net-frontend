@@ -23,7 +23,7 @@ const Inventory = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/inventory/');
+        const response = await fetch('/api/inventory/');
         const data = await response.json();
         setInventory(data);
       } catch (error) {
