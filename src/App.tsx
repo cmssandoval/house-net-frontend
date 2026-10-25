@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import '@/App.css';
 
 import { AuthProvider } from "@/contexts/AuthProvider.tsx";
+import PublicRoute from "@/views/PublicRoute";
 import ProtectedRoute from "@/views/ProtectedRoute.tsx";
-
 import PublicLayout from '@/layouts/PublicLayout.tsx';
 import MainLayout from "@/layouts/MainLayout.tsx";
 import AdminLayout from "@/layouts/AdminLayout.tsx";
@@ -12,14 +12,16 @@ import Home from "@/views/Public/Home.tsx";
 import Login from "@/views/Public/Login.tsx";
 import Register from "@/views/Public/Register.tsx";
 import NotFound from "@/views/Public/NotFound.tsx";
+import PublicResources from "@/views/Public/PublicResources";
 
 import Dashboard from "@/views/Auth/Dashboard.tsx";
 import Inventory from "@/views/Auth/Inventory.tsx";
 import Tasks from '@/views/Auth/Tasks.tsx';
 import Camera from "@/views/Auth/Camera.tsx";
-import Admin from "@/views/Admin/Admin.tsx";
-import PublicRoute from "./views/PublicRoute";
-import PublicResources from "./views/Public/PublicResources";
+
+import Admin from "@/views/Admin/AdminDashboard";
+import InventoryAdmin from '@/views/Admin/InventoryAdmin';
+import UsersAdmin from "@/views/Admin/UsersAdmin";
 
 const App = () => {
   return (
@@ -47,6 +49,9 @@ const App = () => {
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route element={<AdminLayout />}>
             <Route path='/admin' element={<Admin />} />
+            <Route path='/admin/inventory' element={<InventoryAdmin />} />
+            <Route path='/admin/users' element={<UsersAdmin />} />
+            <Route path='/admin/tasks' element={<Admin />} />
           </Route>
         </Route>
         

@@ -22,16 +22,18 @@ const AdminSidebar = () => {
           <Navbar.Collapse id="sidebarMenu" className="w-100">
             <Nav className="flex-column w-100">
 
-              <Nav.Link className="px-4 fs-5" as={Link} to="/tablero"        > Dashboard </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/inventario"     > Inventario </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/tareas"         > Tareas </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/camara"         > Cámara </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/tareas"    > Tareas </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/proyectos" > Proyectos </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/recursos"  > Recursos </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/metas"     > Metas </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/notas"     > Notas </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/ajustes"   > Ajustes </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin"           > Admin Panel </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/inventory" > Inventario </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/users"     > Usuarios </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/tasks"     > Tareas </Nav.Link>
+              {/*
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/projects"          > Proyectos </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/notes"             > Notas </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/internal-resources"> Recursos Internos </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/public-resources"  > Recursos Públicos </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/goals"             > Metas </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/admin/settings"          > Ajustes </Nav.Link>
+              */}
 
               {user && <Nav.Link className="text-danger fw-bold px-4 fs-5" onClick={logout}> Logout </Nav.Link>}
             </Nav>
