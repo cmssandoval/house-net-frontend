@@ -11,7 +11,9 @@ const PublicLayout = () => {
       <Row>
         <PublicSidebar />
         <Col xs={12} lg={9} xl={9} className="p-4 px-lg-5">
-          <Outlet />
+          <Container className='px-1 px-lg-5 mt-3'>
+            <Outlet />
+          </Container>
         </Col>
       </Row>
     </Container>
