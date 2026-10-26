@@ -7,15 +7,14 @@ interface ApiCatLoc {
     name: string;
 }
 
-
-
 export interface Item {
     id: number;
-    name: string;
+    productName: string;
     imageUrl: string;
     category: ApiCatLoc;
     location: ApiCatLoc;
     stock: number;
+    unit: string;
 }
 
 export interface InventoryTableProps {
