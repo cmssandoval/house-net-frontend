@@ -84,7 +84,7 @@ function AddProductModal() {
         stock: Number(formData.stock),
       };
       
-      const response = await fetch('http://localhost:3000/api/inventory/', {
+      const response = await fetch('/api/inventory/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

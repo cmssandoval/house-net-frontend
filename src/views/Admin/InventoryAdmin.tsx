@@ -23,11 +23,11 @@ const InventoryAdmin = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const catResponse = await fetch('http://localhost:3000/api/inventory/categories');
+        const catResponse = await fetch('/api/inventory/categories');
         const catData = await catResponse.json();
         setCategories(catData);
 
-        const locResponse = await fetch('http://localhost:3000/api/inventory/locations');
+        const locResponse = await fetch('/api/inventory/locations');
         const locData = await locResponse.json();
         setLocations(locData);
       } catch (error) {
