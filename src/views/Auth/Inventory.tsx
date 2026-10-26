@@ -36,7 +36,7 @@ const Inventory = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <h2 className="fw-bold d-inline">Inventario</h2>
       <Container className='px-1 my-4 p-0 d-flex justify-content-around gap-4'>
         <TableFilters
@@ -54,7 +54,7 @@ const Inventory = () => {
           shownItems={shownItems}
         />
       </Container>
-    </>
+    </Container>
   );
 };
 
