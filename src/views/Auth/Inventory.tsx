@@ -18,7 +18,7 @@ const Inventory = () => {
   const shownItems =
     filter === 'Todo'
       ? inventory
-      : inventory.filter((item) => item.category === filter);
+      : inventory.filter((item) => item.category.name === filter);
 
   useEffect(() => {
     const getData = async () => {

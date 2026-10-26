@@ -22,8 +22,8 @@ const InventoryTable = ({ shownItems }: InventoryTableProps) => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.imageUrl}</td>
-                <td>{item.category}</td>
-                <td>{item.location}</td>
+                <td>{item.category.name}</td>
+                <td>{item.location.name}</td>
                 <td>{item.stock}</td>
               </tr>
             ))}
