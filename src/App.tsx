@@ -14,10 +14,10 @@ import Register from "@/views/Public/Register.tsx";
 import NotFound from "@/views/Public/NotFound.tsx";
 import PublicResources from "@/views/Public/PublicResources";
 
-import Dashboard from "@/views/Auth/Dashboard.tsx";
-import Inventory from "@/views/Auth/Inventory.tsx";
-import Tasks from '@/views/Auth/Tasks.tsx';
-import Camera from "@/views/Auth/Camera.tsx";
+import Dashboard from "@/views/Private/Dashboard";
+import Inventory from "@/views/Private/Inventory";
+import Tasks from '@/views/Private/Tasks';
+import Camera from "@/views/Private/Camera";
 
 import Admin from "@/views/Admin/AdminDashboard";
 import InventoryAdmin from '@/views/Admin/InventoryAdmin';
