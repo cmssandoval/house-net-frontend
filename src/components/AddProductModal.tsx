@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+import apiClient from '@/config/axiosConfig';
+
 const categories: Category[] = ['Comida', 'Aseo'];
 const locations: Location[] = ['Cocina', 'Despensa', 'Baño'];
 
@@ -84,18 +86,7 @@ function AddProductModal() {
         stock: Number(formData.stock),
       };
       
-      const response = await fetch('/api/inventory/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
+      await apiClient.post('/inventory/', data);
       setErrors({});
       alert('Producto ingresado con éxito');
     } catch (error) {

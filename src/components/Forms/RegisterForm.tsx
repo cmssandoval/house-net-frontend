@@ -68,7 +68,6 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
     try {
       await onSubmit(submitData as RegisterSubmitData);
       setRegisterSuccess(true);
-      // setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
       setErrors({});
     } catch (err){
       setGlobalError(err instanceof Error ? err.message : 'Error');
