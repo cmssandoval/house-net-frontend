@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import { Badge, Table } from 'react-bootstrap';
+import apiClient from '@/config/axiosConfig';
 
 interface FetchedData {
   id: string;
@@ -23,13 +24,11 @@ const InventoryAdmin = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const catResponse = await fetch('/api/inventory/categories');
-        const catData = await catResponse.json();
-        setCategories(catData);
+        const catResponse = await apiClient.get('/inventory/categories');
+        setCategories(catResponse.data);
 
-        const locResponse = await fetch('/api/inventory/locations');
-        const locData = await locResponse.json();
-        setLocations(locData);
+        const locResponse = await apiClient.get('/inventory/locations');
+        setLocations(locResponse.data);
       } catch (error) {
         console.log(error);
         alert('Error al obtener las categorías o ubicaciones...');
@@ -68,14 +67,7 @@ const InventoryAdmin = () => {
     const deleteNameParam = action === 'DELETE' ? `/${data.tableData}` : '';
 
     try {
-      const response = await fetch(`/api/inventory/${route}${deleteNameParam}`, {
-        method: action,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-      });
+      const response = await apiClient.post(`/inventory/${route}${deleteNameParam}`, data);
       console.log(response);
     } catch (error) {
       console.error(error);

@@ -1,18 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext.ts';
-
-import Spinner from 'react-bootstrap/Spinner';
+import LoadingScreen from '@/components/LoadingScreen.tsx';
 
 const PublicRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isLoading, role } = useAuth();
 
-  if (isLoading) {
-    return <div><h3>Cargando...</h3><Spinner /></div>;
-  }
-
-  if ( isAuthenticated ) {
-    return <Navigate to="/tablero" replace />;
-  }
+  if (isLoading) return <LoadingScreen />;
+  if ( role !== 'guest' ) return <Navigate to="/tablero" replace />;
 
   return <Outlet />;
 };
