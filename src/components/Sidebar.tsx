@@ -4,12 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import { useAuth } from "@/contexts/AuthContext.ts";
-import sidebarRoutes from "@/config/appRoutes";
+import appRoutes from "@/config/appRoutes";
 
 const Sidebar = () => {
 
   const { role, logout } = useAuth();
-  const allowedRoutes = sidebarRoutes.filter(r => r.roles.includes(role));
+  const allowedRoutes = appRoutes.filter(r => r.roles.includes(role));
 
   return (
     <Col xs={12} lg={3} xl={3} className="py-3 px-0 min-vh-lg-100 nav-list">
