@@ -1,23 +1,20 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext.ts';
-import LoadingScreen from '@/components/LoadingScreen';
+import LoadingScreen from '@/components/LoadingScreen.tsx';
+import type { UserRole } from '@/types/auth.ts';
 
 interface ProtectedRouteProps {
-  allowedRoles?: string[]
+  allowedRoles?: UserRole[];
 }
 
 const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isLoading, role } = useAuth();
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  if (isLoading) return <LoadingScreen />;
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
+  if (role === 'guest') return <Navigate to="/" replace />;
 
-  if (allowedRoles && (!user?.role || !allowedRoles.includes(user?.role))) {
+  if (allowedRoles && !allowedRoles.includes(role)) {
     return <Navigate to="/tablero" replace />; 
   }
 

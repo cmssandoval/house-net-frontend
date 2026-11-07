@@ -4,9 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/Sidebar.tsx';
 
-const MainLayout = () => {
+const DashboardLayout = () => {
+
   return (
     <Container fluid>
       <Row>
@@ -19,4 +20,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default DashboardLayout;

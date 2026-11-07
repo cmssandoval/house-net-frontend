@@ -21,7 +21,8 @@ const UsersAdmin = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        // const response = await fetch('/api/user/admin');
+        //! USE AXIOS INSTEAD
+        // const response = await fetch('/user/admin');
         // const data = await response.json();
         // setUsers(data);
         setUsers([{

@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
-import TableFilters from '@/components/Inventory/TableFilters';
-import InventoryTable from '@/components/Inventory/InventoryTable';
-import SearchForm from '@/components/Inventory/SearchForm';
+import TableFilters from '@/components/TableFilters.tsx';
+import InventoryTable from '@/components/InventoryTable.tsx';
+import SearchForm from '@/components/SearchForm.tsx';
 
 import type { Filter, Item } from '@/types/inventory.ts';
-import AddProductModal from '@/components/Inventory/AddProductModal';
+import AddProductModal from '@/components/AddProductModal.tsx';
+import apiClient from '@/config/axiosConfig.ts';
 
 const filters: Filter[] = ['Todo', 'Comida', 'Aseo'];
 
@@ -23,9 +24,8 @@ const Inventory = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch('/api/inventory/');
-        const data = await response.json();
-        setInventory(data);
+        const response = await apiClient('/inventory');
+        setInventory(response.data);
       } catch (error) {
         console.log(error);
         alert('Error al obtener los productos...');

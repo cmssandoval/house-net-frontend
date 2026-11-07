@@ -1,22 +1,5 @@
+import type { AuthContextType } from '@/types/auth.ts';
 import { createContext, useContext } from 'react';
-
-export interface UserInfo {
-  userId: string;
-  role: string;
-}
-
-export interface AuthState {
-  user: UserInfo | null;
-  isLoading: boolean;
-}
-
-export interface AuthContextType {
-  user: UserInfo | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: () => Promise<void>;
-  logout: () => Promise<void>;
-}
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

@@ -1,15 +1,19 @@
-import AdminPanelCard from '@/components/Admin/AdminPanelCard';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 const AdminDashboard = () => {
   return (
     <>
-      <h2 className="ps-2 fw-bold d-inline">Admin Panel</h2>
-      <Container className='my-4'>
-        <AdminPanelCard />
+      <Container className='px-1 px-lg-5 mt-3'>
+        <Card className='p-4 card-custom gap-2'>
+          <h2>AdminDashboard</h2>
+          <p>Aquí encontrarás herramientas para mantener y configurar el sistema de House Net</p>
+          <p>Mientras, puedes visitar otras secciones disponibles en el menú</p>
+        </Card>
       </Container>
     </>
   );
 };
+
 
 export default AdminDashboard;
