@@ -1,3 +1,5 @@
+import '@/../env.d.ts';
+
 import { Link } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
@@ -36,6 +38,11 @@ const Sidebar = () => {
               ))}
               {role !== 'guest' && <Nav.Link className="text-danger fw-bold px-4 fs-5" onClick={logout}> Logout </Nav.Link>}
             </Nav>
+            <div className="d-flex fixed-bottom justify-content-between w-100 align-items-center m-lg-3 m-xl-4">
+              <small className="d-block text-secondary"
+              > build {__BUILD__}
+              </small>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
