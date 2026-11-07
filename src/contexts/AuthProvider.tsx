@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async () => {
     setAuthState((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await apiClient.get<UserInfo>('/auth/me');
-      setAuthState({ user: response.data, isLoading: false });
+      const response = await apiClient.get('/auth/me');
+      setAuthState({ user: response.data.user, isLoading: false });
       await fetchMe();
     } catch (error) {
       console.error("Error en login:", error);
