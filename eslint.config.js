@@ -22,4 +22,16 @@ export default defineConfig([
       "semi": ["error", "always"]
     },
   },
+  {
+    files: ['**/*.{test,spec}.{ts,tsx}', 'vitest.setup.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.vitest,
+      },
+    },
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
