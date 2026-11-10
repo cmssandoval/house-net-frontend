@@ -2,12 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
-import TableFilters from '@/components/TableFilters.tsx';
-import InventoryTable from '@/components/InventoryTable.tsx';
-import SearchForm from '@/components/SearchForm.tsx';
+import TableFilters from '@/components/Inventory/TableFilters.tsx';
+import InventoryTable from '@/components/Inventory/InventoryTable.tsx';
+import SearchForm from '@/components/Inventory/SearchForm.tsx';
 
 import type { Item } from '@/types/inventory.ts';
-import AddProductModal from '@/components/AddProductModal.tsx';
+import AddProductModal from '@/components/Inventory/AddProductModal.tsx';
 import apiClient from '@/config/axiosConfig.ts';
 
 const fetchInventory = async () => {
