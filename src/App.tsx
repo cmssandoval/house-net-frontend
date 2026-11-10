@@ -5,6 +5,9 @@ import '@/styles/Dashboard.css';
 import '@/styles/FeaturePlaceholder.css';
 import '@/styles/Inventory.css';
 import '@/styles/Admin.css';
+import '@/styles/AdminDashboard.css';
+import '@/styles/AdminManagement.css';
+import '@/styles/NotFound.css';
 
 import { AuthProvider } from "@/contexts/AuthProvider.tsx";
 import DashboardLayout from "@/layouts/DashboardLayout.tsx";

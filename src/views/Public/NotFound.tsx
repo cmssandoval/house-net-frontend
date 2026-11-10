@@ -1,37 +1,21 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-const NotFound = () => {
-  return (
-    <Container fluid>
-      <Row className='justify-content-center'>
-        <Col xs={12} lg={10} className='p-4 px-lg-5'>
-          <Container className='px-1 my-4'>
-            <h2 className="p-2 fw-bold">Not Found</h2>
-
-            <Card className='p-4 my-4 card-custom text-center gap-3'>
-              <Card.Title className='fw-bold'>Error 404</Card.Title>
-
-              <Card.Text className='fw-bold'>No se ha encontrado la página que buscabas</Card.Text>
-              <Link
-                className='text-white text-decoration-none mx-auto'
-                to='/'
-              >
-                <Button
-                  variant='dark'
-                  className='px-4'
-                >Volver al inicio</Button>
-              </Link>
-            </Card>
-          </Container>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+const NotFound = () => (
+  <section className="not-found-page" aria-labelledby="not-found-title">
+    <div className="not-found-card">
+      <span className="not-found-code">ERROR 404</span>
+      <h1 className="not-found-title" id="not-found-title">
+        Uy, este espacio no existe.
+      </h1>
+      <p className="not-found-description">
+        No encontramos la página que buscabas. Puede que el enlace haya cambiado
+        o ya no esté disponible.
+      </p>
+      <Link className="not-found-home-link" to="/">
+        Volver al inicio
+      </Link>
+    </div>
+  </section>
+);
 
 export default NotFound;
