@@ -62,7 +62,6 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
     try {
       await onSubmit(formData);
       setLoginSuccess(true);
-      // setFormData({ email: '', password: '', role: 'usuario' });
       setErrors({});
     } catch (err) {
       setGlobalError(err instanceof Error ? err.message : 'Error');
