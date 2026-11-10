@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import '@/App.css';
+import '@/styles/Navigation.css';
+import '@/styles/Dashboard.css';
+import '@/styles/FeaturePlaceholder.css';
 
 import { AuthProvider } from "@/contexts/AuthProvider.tsx";
 import DashboardLayout from "@/layouts/DashboardLayout.tsx";

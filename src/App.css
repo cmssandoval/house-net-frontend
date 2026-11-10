@@ -1,33 +1,93 @@
+:root {
+  font-family: "Segoe UI", sans-serif;
+  color: #2f3530;
+  background: #f5f4f0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --color-page: #f5f4f0;
+  --color-surface: #fffefa;
+  --color-surface-muted: #eceee8;
+  --color-text: #2f3530;
+  --color-muted: #737970;
+  --color-line: #e4e3dc;
+  --color-accent: #697a68;
+  --color-accent-dark: #4b5c4b;
+  --font-display: "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-    background: #f5f6fa;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: "Segoe UI", sans-serif;
 }
 
-.nav-list {
-    background: #1f1f1f;
-    color: #fff;
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
-.nav-list a {
-    color: #bbb;
-    text-decoration: none;
-    display: block;
-    padding: 12px 18px;
+a {
+  color: inherit;
 }
 
-.nav-list a:hover {
-    background: #333;
-    color: #fff;
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #9aab94;
+  outline-offset: 3px;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100dvh;
+}
+
+.app-main {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  padding: clamp(1.25rem, 3.8vw, 3.25rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.015em;
 }
 
 .card-custom {
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  background: var(--color-surface);
 }
 
-@media (min-width: 992px) {
-    .nav-list {
-        min-height: 100dvh;
-        position: sticky;
-        top: 0;
-    }
+@media (max-width: 991.98px) {
+  .app-shell {
+    display: block;
+    width: 100%;
+  }
+
+  .app-main {
+    display: block;
+    width: 100%;
+    padding: 1.5rem 1.1rem calc(5.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
