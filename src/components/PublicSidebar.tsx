@@ -19,10 +19,11 @@ const PublicSidebar = () => {
           <Navbar.Collapse id="sidebarMenu" className="w-100">
             <Nav className="flex-column w-100">
 
-              <Nav.Link className="px-4 fs-5" as={Link} to="/"                > Home </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/register"        > Registrarse </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/"                > Inicio </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/register"        > Crear cuenta </Nav.Link>
               <Nav.Link className="px-4 fs-5" as={Link} to="/login"           > Iniciar Sesión </Nav.Link>
-              <Nav.Link className="px-4 fs-5" as={Link} to="/public-resources"> Recursos Públicos </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/public-tools"   > Herramientas </Nav.Link>
+              <Nav.Link className="px-4 fs-5" as={Link} to="/public-resources"> Recursos </Nav.Link>
 
             </Nav>
           </Navbar.Collapse>
