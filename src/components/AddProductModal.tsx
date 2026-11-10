@@ -99,12 +99,12 @@ function AddProductModal() {
 
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
+      <Button className="inventory-add-button" onClick={handleShow}>
         Añadir
       </Button>
 
-      <Modal show={show} onHide={handleClose} scrollable>
-        <Modal.Header>
+      <Modal show={show} onHide={handleClose} scrollable contentClassName="inventory-modal-content">
+        <Modal.Header className="inventory-modal-header">
           <Modal.Title>Añade un producto</Modal.Title>
         </Modal.Header>
 
@@ -200,7 +200,7 @@ function AddProductModal() {
           </Form>
         </Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className="inventory-modal-footer">
           <Button variant="danger" onClick={handleDiscardDataClose}>
             Descartar
           </Button>

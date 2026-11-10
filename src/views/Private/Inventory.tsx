@@ -36,24 +36,26 @@ const Inventory = () => {
   }, []);
 
   return (
-    <Container>
-      <h2 className="fw-bold d-inline">Inventario</h2>
-      <Container className='px-1 my-4 p-0 d-flex justify-content-around gap-4'>
+    <Container className="inventory-page">
+      <header className="inventory-heading">
+        <h1 className="inventory-title">Inventario</h1>
+      </header>
+      <div className="inventory-toolbar">
         <TableFilters
           filters={filters}
           filter={filter}
           onChange={setFilter}
         />
-        <Container className='d-flex justify-content-around gap-3'>
+        <div className="inventory-controls">
           <SearchForm />
           <AddProductModal />
-        </Container>
-      </Container>
-      <Container>
+        </div>
+      </div>
+      <div className="inventory-content">
         <InventoryTable
           shownItems={shownItems}
         />
-      </Container>
+      </div>
     </Container>
   );
 };

@@ -5,9 +5,9 @@ import type { InventoryTableProps, Item } from '@/types/inventory.ts';
 
 const InventoryTable = ({ shownItems }: InventoryTableProps) => {
   return (
-    <Row>
-      <Card className='p-2 card-custom'>
-        <Table responsive className='text-center'>
+    <Row className="inventory-table-row">
+      <Card className="inventory-table-card card-custom">
+        <Table responsive className="inventory-table mb-0">
           <thead>
             <tr>
               <th>Nombre</th>

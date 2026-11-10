@@ -14,8 +14,8 @@ const SearchForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="w-100">
-      <Form.Group className="d-flex gap-2 shadow-sm">
+    <Form onSubmit={handleSubmit} className="inventory-search-form">
+      <Form.Group className="inventory-search-group">
         <Form.Control
           type="text"
           name="search"
@@ -23,7 +23,7 @@ const SearchForm = () => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <Button type="submit">Buscar</Button>
+        <Button className="inventory-search-button" type="submit">Buscar</Button>
       </Form.Group>
     </Form>
   );

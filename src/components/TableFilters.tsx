@@ -7,7 +7,7 @@ const TableFilters = ({ filters, filter, onChange }: TableFiltersProps) => {
       name='filter'
       value={ filter }
       onChange={( event ) => onChange( event.target.value as Filter )}
-      className="d-inline w-auto shadow-sm"
+      className="inventory-filter-select"
       aria-label="Seleccionar filtro"
     >
       {filters.map(( filter ) => (
