@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext.ts';
+import ThemeToggle from '@/components/ThemeToggle.tsx';
 import appRoutes from '@/config/appRoutes.tsx';
 
 const iconByPath: Record<string, string> = {
@@ -66,15 +67,21 @@ const Sidebar = () => {
           )}
         </nav>
 
-        <small className="sidebar-build">build {__BUILD__}</small>
+        <div className="sidebar-footer">
+          <ThemeToggle />
+          <small className="sidebar-build">build {__BUILD__}</small>
+        </div>
       </aside>
 
       <div className="mobile-navigation d-lg-none">
         <header className="mobile-topbar">
-          <NavLink className="mobile-brand" to={role === 'guest' ? '/' : '/tablero'}>
-            House Net
-          </NavLink>
-          <span>El hogar, en un solo lugar</span>
+          <div className="mobile-brand-group">
+            <NavLink className="mobile-brand" to={role === 'guest' ? '/' : '/tablero'}>
+              House Net
+            </NavLink>
+            <span>El hogar, en un solo lugar</span>
+          </div>
+          <ThemeToggle />
         </header>
 
         <nav className="mobile-tabs" aria-label="Navegación principal">
