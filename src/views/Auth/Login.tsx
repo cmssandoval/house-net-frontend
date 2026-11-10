@@ -5,12 +5,12 @@ import LoginForm from '@/components/Auth/LoginForm';
 import type { LoginFormData } from '@/schemas/login.ts';
 
 const Login = () => {
-  const { login } = useAuth();
+  const { checkAuth } = useAuth();
 
   const handleLogin = async (data: LoginFormData) => {
     try {
       await apiClient.post<LoginFormData>('/auth/login/', data);
-      await login();
+      await checkAuth();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const serverMessage = error.response?.data?.message;
