@@ -33,11 +33,7 @@ const Sidebar = () => {
   const { role, logout } = useAuth();
   const { pathname } = useLocation();
   const [openMorePath, setOpenMorePath] = useState<string | null>(null);
-  const navigationRoutes = appRoutes.filter(
-    (route) =>
-      route.roles.includes(role) &&
-      (route.navigationRoles ?? route.roles).includes(role),
-  );
+  const navigationRoutes = appRoutes.filter((route) => route.roles.includes(role));
   const mobileTabs = navigationRoutes.filter((route) => route.mobileTab);
   const moreRoutes = navigationRoutes.filter((route) => !route.mobileTab);
   const moreOpen = openMorePath === pathname;

@@ -4,7 +4,6 @@ import type { Role } from "@/types/auth";
 import Home from '@/views/Auth/Home';
 import Login from '@/views/Auth/Login';
 import Register from '@/views/Auth/Register';
-import NotFound from '@/views/Public/NotFound';
 import PublicResources from '@/views/Public/PublicResources';
 import Dashboard from '@/views/Private/Dashboard';
 import Inventory from '@/views/Private/Inventory';
@@ -12,14 +11,11 @@ import Tasks from '@/views/Private/Tasks';
 import Calendar from '@/views/Private/Calendar';
 import Tools from '@/views/Public/Tools';
 import AdminDashboard from '@/views/Admin/AdminDashboard';
-import InventoryAdmin from '@/views/Admin/InventoryAdmin';
-import UsersAdmin from '@/views/Admin/UsersAdmin';
 
 export interface AppRoute {
   path: string;
   label: string;
   roles: Role[];
-  navigationRoles?: Role[];
   element: ReactElement;
   mobileTab?: boolean;
 }
@@ -36,23 +32,8 @@ const appRoutes: AppRoute[] = [
   { path: '/public-tools', label: 'Herramientas', roles: ['admin', 'user', 'guest'], element: <Tools />, mobileTab: true },
 
   { path: '/admin', label: 'Administración', roles: ['admin'], element: <AdminDashboard /> },
-  {
-    path: '/admin/inventory',
-    label: 'Categorías y ubicaciones',
-    roles: ['admin'],
-    navigationRoles: ['admin'],
-    element: <InventoryAdmin />,
-  },
-  {
-    path: '/admin/users',
-    label: 'Usuarios',
-    roles: ['admin'],
-    navigationRoles: ['admin'],
-    element: <UsersAdmin />,
-  },
 
   { path: '/public-resources', label: 'Recursos', roles: ['admin', 'user', 'guest'], element: <PublicResources />, mobileTab: true },
-  { path: '*', label: 'No encontrado', roles: ['admin', 'user', 'guest'], navigationRoles: [], element: <NotFound /> },
 ];
 
 export default appRoutes;

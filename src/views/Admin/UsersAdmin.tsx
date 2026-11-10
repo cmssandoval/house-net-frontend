@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 interface FetchedData {
   id: string;
@@ -14,7 +15,11 @@ interface FetchedData {
   role: string;
 }
 
-const UsersAdmin = () => {
+interface UsersAdminProps {
+  onBack: () => void;
+}
+
+const UsersAdmin = ({ onBack }: UsersAdminProps) => {
 
   const [ users, setUsers ] = useState<FetchedData[]>([]);
 
@@ -44,23 +49,34 @@ const UsersAdmin = () => {
 
   return (
     <main className="admin-page admin-users-page">
-      <h2 className="admin-page-title">Inventory Admin</h2>
+      <header className="admin-subpage-heading">
+        <Button className="admin-back-button" variant="link" onClick={onBack}>
+          ← Administración
+        </Button>
+        <p className="eyebrow">Acceso al hogar</p>
+        <h1 className="admin-page-title">Usuarios</h1>
+      </header>
       <Container className="admin-content">
         <Row>
           <Card className="admin-panel-card card-custom">
             <div className="admin-panel-heading">
-              <Card.Title className="admin-panel-title">Manejo de usuarios</Card.Title>
+              <div>
+                <Card.Title className="admin-panel-title">Cuentas del hogar</Card.Title>
+                <p className="admin-panel-note">
+                  Vista de muestra; la gestión de usuarios se conectará cuando esté disponible la API.
+                </p>
+              </div>
             </div>
             <Container className="admin-table-container">
               <Table responsive className="admin-table users-table mb-0">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Full Name</th>
-              <th>Display Name</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Role</th>
+              <th>Nombre</th>
+              <th>Nombre visible</th>
+              <th>Correo</th>
+              <th>Estado</th>
+              <th>Rol</th>
             </tr>
           </thead>
           <tbody>

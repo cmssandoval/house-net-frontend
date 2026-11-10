@@ -3,39 +3,70 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Badge, Table } from 'react-bootstrap';
 import apiClient from '@/config/axiosConfig';
 
 interface FetchedData {
-  id: string;
+  id: number;
   name: string;
 }
 
-const InventoryAdmin = () => {
+interface InventoryAdminProps {
+  onBack: () => void;
+}
 
-  const [ action, setAction ]     = useState('');
+const fetchInventoryTables = async () => {
+  const [categoriesResponse, locationsResponse] = await Promise.all([
+    apiClient.get<FetchedData[]>('/inventory/categories'),
+    apiClient.get<FetchedData[]>('/inventory/locations'),
+  ]);
+  return {
+    categories: categoriesResponse.data,
+    locations: locationsResponse.data,
+  };
+};
+
+const InventoryAdmin = ({ onBack }: InventoryAdminProps) => {
+
+  const [ action, setAction ]     = useState<'POST' | 'DELETE' | ''>('');
   const [ category, setCategory ] = useState('');
   const [ location, setLocation ] = useState('');
   
   const [ categories, setCategories ] = useState<FetchedData[]>([]);
   const [ locations, setLocations ] = useState<FetchedData[]>([]);
 
+  const loadTables = useCallback(async () => {
+    try {
+      const tables = await fetchInventoryTables();
+      setCategories(tables.categories);
+      setLocations(tables.locations);
+    } catch (error) {
+      console.error(error);
+      alert('Error al obtener las categorías o ubicaciones...');
+    }
+  }, []);
+
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const catResponse = await apiClient.get('/inventory/categories');
-        setCategories(catResponse.data);
+    let active = true;
 
-        const locResponse = await apiClient.get('/inventory/locations');
-        setLocations(locResponse.data);
-      } catch (error) {
-        console.log(error);
-        alert('Error al obtener las categorías o ubicaciones...');
-      }
+    fetchInventoryTables()
+      .then((tables) => {
+        if (active) {
+          setCategories(tables.categories);
+          setLocations(tables.locations);
+        }
+      })
+      .catch((error: unknown) => {
+        if (active) {
+          console.error(error);
+          alert('Error al obtener las categorías o ubicaciones...');
+        }
+      });
+
+    return () => {
+      active = false;
     };
-
-    getData();
   }, []);
 
   const handleChange = (
@@ -43,13 +74,12 @@ const InventoryAdmin = () => {
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
     setter(event.target.value);
-    if (!category && !location ) setAction('');
+    setAction('');
   };
 
-  const handleActionChange = ( actionArgument: string) => {
+  const handleActionChange = ( actionArgument: 'POST' | 'DELETE') => {
     if (!category && !location ) return;
     setAction(actionArgument);
-    console.log(category);    
   };
 
   const handleCleanup = () => {
@@ -60,15 +90,15 @@ const InventoryAdmin = () => {
 
   const handleSubmit = async ( event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!category && !location ) return handleCleanup();
+    if ((!category && !location) || !action) return handleCleanup();
 
     const data = { tableData: category ? category : location };
     const route = category ? 'categories' : 'locations';
     const deleteNameParam = action === 'DELETE' ? `/${data.tableData}` : '';
 
     try {
-      const response = await apiClient.post(`/inventory/${route}${deleteNameParam}`, data);
-      console.log(response);
+      await apiClient.post(`/inventory/${route}${deleteNameParam}`, data);
+      await loadTables();
     } catch (error) {
       console.error(error);
     } finally {
@@ -78,12 +108,18 @@ const InventoryAdmin = () => {
 
   return (
     <main className="admin-page admin-inventory-page">
-      <h2 className="admin-page-title">Inventory Admin</h2>
+      <header className="admin-subpage-heading">
+        <Button className="admin-back-button" variant="link" onClick={onBack}>
+          ← Administración
+        </Button>
+        <p className="eyebrow">Inventario</p>
+        <h1 className="admin-page-title">Categorías y ubicaciones</h1>
+      </header>
       <Container className="admin-content">
         <Row>
           <Card className="admin-panel-card card-custom">
             <div className="admin-panel-heading">
-              <Card.Title className="admin-panel-title">Manejo de tablas</Card.Title>
+              <Card.Title className="admin-panel-title">Gestionar opciones de inventario</Card.Title>
               <div className="admin-panel-actions">
                 <Badge
                   className={'mx-2 p-2 ' + (action === 'DELETE' ? 'bg-danger' : 'bg-success')}
@@ -92,14 +128,15 @@ const InventoryAdmin = () => {
                   disabled={
                     ((!category || !location) && !action)
                   }
-                >SEND</Button>
+                >Confirmar</Button>
               </div>
             </div>
             <Form id='inventoryAdminForm' onSubmit={handleSubmit} className="admin-management-form">
               <Form.Group className="admin-management-group">
-                <Form.Label className='fw-bold'>+/- Category</Form.Label>
+                <Form.Label className='fw-bold'>Categoría</Form.Label>
                 <div className="admin-management-controls">
                   <Form.Control
+                  aria-label="Nombre de categoría"
                   value={category}
                   disabled={location ? true : false}
                   onChange={(e) => handleChange(e, setCategory)}
@@ -108,12 +145,12 @@ const InventoryAdmin = () => {
                     onClick={() => handleActionChange('POST')}
                     variant='success'
                     disabled={!category ? true : false}  
-                  >POST</Button>
+                  >Añadir</Button>
                   <Button
                     onClick={() => handleActionChange('DELETE')}
                     variant='danger'
                     disabled={!category ? true : false}  
-                  >DELETE</Button>
+                  >Eliminar</Button>
                   <Button
                     variant='dark'
                     onClick={() => handleCleanup()}
@@ -121,9 +158,10 @@ const InventoryAdmin = () => {
                 </div>
               </Form.Group>
               <Form.Group className="admin-management-group">
-                <Form.Label className='fw-bold'>+/- Location</Form.Label>
+                <Form.Label className='fw-bold'>Ubicación</Form.Label>
                 <div className="admin-management-controls">
                   <Form.Control
+                  aria-label="Nombre de ubicación"
                   value={location}
                   disabled={category ? true : false}
                   onChange={(e) => handleChange(e, setLocation)}
@@ -132,12 +170,12 @@ const InventoryAdmin = () => {
                     onClick={() => handleActionChange('POST')}
                     variant='success'
                     disabled={!location ? true : false}  
-                  >POST</Button>
+                  >Añadir</Button>
                   <Button
                     onClick={() => handleActionChange('DELETE')}
                     variant='danger'
                     disabled={!location ? true : false}  
-                  >DELETE</Button>
+                  >Eliminar</Button>
                   <Button
                     variant='dark'
                     onClick={() => handleCleanup()}
@@ -150,22 +188,22 @@ const InventoryAdmin = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Type</th>
-              <th>Value</th>
+              <th>Tipo</th>
+              <th>Nombre</th>
             </tr>
           </thead>
           <tbody>
             {categories.map(( cat ) => (
               <tr key={cat.id}>
                 <td>{cat.id}</td>
-                <td>Category</td>
+                <td>Categoría</td>
                 <td>{cat.name}</td>
               </tr>
             ))}
             {locations.map(( loc ) => (
               <tr key={loc.id}>
                 <td>{loc.id}</td>
-                <td>Location</td>
+                <td>Ubicación</td>
                 <td>{loc.name}</td>
               </tr>
             ))}

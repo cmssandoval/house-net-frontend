@@ -8,6 +8,7 @@ import '@/styles/Admin.css';
 
 import { AuthProvider } from "@/contexts/AuthProvider.tsx";
 import DashboardLayout from "@/layouts/DashboardLayout.tsx";
+import NotFound from '@/views/Public/NotFound';
 
 import appRoutes from '@/config/appRoutes.tsx';
 import RoleGuard from "./components/RoleGuard.tsx";
@@ -25,6 +26,7 @@ const App = () => {
               element={<RoleGuard roles={roles}>{element}</RoleGuard>}
             />
           ))}
+          <Route path="*" element={<NotFound />} />
         </Route>
         
       </Routes>
