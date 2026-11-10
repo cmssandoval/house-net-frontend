@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
@@ -6,34 +6,61 @@ import TableFilters from '@/components/TableFilters.tsx';
 import InventoryTable from '@/components/InventoryTable.tsx';
 import SearchForm from '@/components/SearchForm.tsx';
 
-import type { Filter, Item } from '@/types/inventory.ts';
+import type { Item } from '@/types/inventory.ts';
 import AddProductModal from '@/components/AddProductModal.tsx';
 import apiClient from '@/config/axiosConfig.ts';
 
-const filters: Filter[] = ['Todo', 'Comida', 'Aseo'];
+const fetchInventory = async () => {
+  const response = await apiClient.get<Item[]>('/inventory');
+  return response.data;
+};
 
 const Inventory = () => {
-  const [filter, setFilter] = useState<Filter>('Todo');
+  const [filter, setFilter] = useState('Todo');
+  const [searchValue, setSearchValue] = useState('');
   const [inventory, setInventory] = useState<Item[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const shownItems =
-    filter === 'Todo'
-      ? inventory
-      : inventory.filter((item) => item.category.name === filter);
+  const loadInventory = useCallback(async () => {
+    try {
+      setInventory(await fetchInventory());
+    } catch (error) {
+      console.error(error);
+      alert('Error al obtener los productos...');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await apiClient('/inventory');
-        setInventory(response.data);
-      } catch (error) {
-        console.log(error);
-        alert('Error al obtener los productos...');
-      }
-    };
+    let active = true;
 
-    getData();
+    fetchInventory()
+      .then((items) => {
+        if (active) setInventory(items);
+      })
+      .catch((error: unknown) => {
+        if (active) {
+          console.error(error);
+          alert('Error al obtener los productos...');
+        }
+      })
+      .finally(() => {
+        if (active) setIsLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
+
+  const filters = ['Todo', ...new Set(inventory.map((item) => item.category.name))];
+  const normalizedSearch = searchValue.trim().toLocaleLowerCase();
+  const shownItems = inventory.filter((item) => {
+    const matchesCategory = filter === 'Todo' || item.category.name === filter;
+    const matchesSearch = item.productName.toLocaleLowerCase().includes(normalizedSearch);
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <Container className="inventory-page">
@@ -47,13 +74,14 @@ const Inventory = () => {
           onChange={setFilter}
         />
         <div className="inventory-controls">
-          <SearchForm />
-          <AddProductModal />
+          <SearchForm onSearch={setSearchValue} />
+          <AddProductModal onProductAdded={loadInventory} />
         </div>
       </div>
       <div className="inventory-content">
         <InventoryTable
           shownItems={shownItems}
+          isLoading={isLoading}
         />
       </div>
     </Container>

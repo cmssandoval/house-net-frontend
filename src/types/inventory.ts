@@ -1,8 +1,4 @@
-export type Category = 'Comida' | 'Aseo';
-export type Location = 'Cocina' | 'Despensa' | 'Baño';
-export type Filter = 'Todo' | Category | Location;
-
-interface ApiCatLoc {
+export interface ApiCatLoc {
     id: number;
     name: string;
 }
@@ -10,7 +6,7 @@ interface ApiCatLoc {
 export interface Item {
     id: number;
     productName: string;
-    imageUrl: string;
+    imageUrl: string | null;
     category: ApiCatLoc;
     location: ApiCatLoc;
     stock: number;
@@ -19,10 +15,11 @@ export interface Item {
 
 export interface InventoryTableProps {
     shownItems: Item[];
+    isLoading: boolean;
 }
 
 export interface TableFiltersProps {
-    filters: Filter[];
-    filter: Filter;
-    onChange: (filter: Filter) => void;
+    filters: string[];
+    filter: string;
+    onChange: (filter: string) => void;
 }

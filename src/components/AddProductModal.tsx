@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import type { Category, Location } from '@/types/inventory.ts';
+import type { ApiCatLoc } from '@/types/inventory.ts';
 import type { FormErrors } from '@/types/forms.ts';
 import { addProduct, type AddProductFormData } from '@/schemas/addProduct.ts';
 
@@ -10,20 +10,44 @@ import Form from 'react-bootstrap/Form';
 
 import apiClient from '@/config/axiosConfig';
 
-const categories: Category[] = ['Comida', 'Aseo'];
-const locations: Location[] = ['Cocina', 'Despensa', 'Baño'];
+interface AddProductModalProps {
+  onProductAdded: () => void | Promise<void>;
+}
 
-function AddProductModal() {
+function AddProductModal({ onProductAdded }: AddProductModalProps) {
   const [ formData, setFormData ] = useState<AddProductFormData>({
     productName: '',
-    category: 'Categoría',
-    location: 'Ubicación',
+    category: '',
+    location: '',
     stock: '',
     unit: '',
   });
 
   const [ show, setShow ] = useState<boolean>(false);
   const [ errors, setErrors ] = useState<FormErrors<AddProductFormData>>({});
+  const [ categories, setCategories ] = useState<ApiCatLoc[]>([]);
+  const [ locations, setLocations ] = useState<ApiCatLoc[]>([]);
+  const [ isLoadingOptions, setIsLoadingOptions ] = useState(true);
+
+  useEffect(() => {
+    const loadOptions = async () => {
+      try {
+        const [categoryResponse, locationResponse] = await Promise.all([
+          apiClient.get<ApiCatLoc[]>('/inventory/categories'),
+          apiClient.get<ApiCatLoc[]>('/inventory/locations'),
+        ]);
+        setCategories(categoryResponse.data);
+        setLocations(locationResponse.data);
+      } catch (error) {
+        console.error(error);
+        alert('Error al obtener las categorías o ubicaciones...');
+      } finally {
+        setIsLoadingOptions(false);
+      }
+    };
+
+    void loadOptions();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const name = event.target.name as keyof AddProductFormData;
@@ -56,8 +80,8 @@ function AddProductModal() {
   const handleCleanup = (): void => {
     setFormData({
       productName: '',
-      category: 'Categoría',
-      location: 'Ubicación',
+      category: '',
+      location: '',
       stock: '',
       unit: '',
     });
@@ -82,11 +106,12 @@ function AddProductModal() {
 
     try {
       const data = {
-        ...formData,
-        stock: Number(formData.stock),
+        ...result.data,
+        stock: Number(result.data.stock),
       };
       
       await apiClient.post('/inventory/', data);
+      await onProductAdded();
       setErrors({});
       alert('Producto ingresado con éxito');
     } catch (error) {
@@ -99,7 +124,7 @@ function AddProductModal() {
 
   return (
     <>
-      <Button className="inventory-add-button" onClick={handleShow}>
+      <Button className="inventory-add-button" onClick={handleShow} disabled={isLoadingOptions}>
         Añadir
       </Button>
 
@@ -125,46 +150,43 @@ function AddProductModal() {
                 </Form.Control.Feedback>
 
               </div>
-              <div className='d-flex gap-5'>
+              <div className='inventory-modal-selects'>
                 <Form.Select
                   aria-label="Seleccionar categoría"
-                  className="shadow-sm"
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
                 >
-                  <option value="Categoría" disabled hidden>
+                  <option value="" disabled>
                     Categoría
                   </option>
                   {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
+                    <option key={category.id} value={category.name}>
+                      {category.name}
                     </option>
                   ))}
                 </Form.Select>
                 <Form.Select
                   aria-label="Seleccionar ubicación"
-                  className="shadow-sm"
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
                 >
-                  <option value="Ubicación" disabled hidden>
+                  <option value="" disabled>
                     Ubicación
                   </option>
                   {locations.map((location) => (
-                    <option key={location} value={location}>
-                      {location}
+                    <option key={location.id} value={location.name}>
+                      {location.name}
                     </option>
                   ))}
                 </Form.Select>
               </div>
-              <div className='d-flex justify-content-between gap-5'>
-                <div className='d-flex flex-column'>
+              <div className='inventory-modal-numbers'>
+                <div>
                   <Form.Label htmlFor='stock'>Stock</Form.Label>
                   <Form.Control
                     aria-label="Stock"
-                    className="shadow-sm"
                     name="stock"
                     id="stock"
                     type='number'
@@ -178,11 +200,10 @@ function AddProductModal() {
                 </Form.Control.Feedback>                  
 
                 </div>
-                <div className='d-flex flex-column'>
+                <div>
                   <Form.Label htmlFor='unit'>Unidad</Form.Label>
                   <Form.Control
                     aria-label="Unidad"
-                    className="shadow-sm"
                     name="unit"
                     id="unit"
                     type='text'
