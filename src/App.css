@@ -1,23 +1,67 @@
 :root {
+  color-scheme: light;
   font-family: "Segoe UI", sans-serif;
-  color: #2f3530;
-  background: #f5f4f0;
+  color: var(--color-text);
+  background: var(--color-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
-  --color-page: #f5f4f0;
-  --color-surface: #fffefa;
-  --color-surface-muted: #eceee8;
-  --color-text: #2f3530;
-  --color-muted: #737970;
-  --color-line: #e4e3dc;
-  --color-accent: #697a68;
-  --color-accent-dark: #4b5c4b;
+  --color-page: #f6f1e7;
+  --color-surface: #fffdf8;
+  --color-surface-muted: #f0e8d8;
+  --color-sidebar: #f2ecdf;
+  --color-text: #24292f;
+  --color-muted: #656d76;
+  --color-line: #d8d1c4;
+  --color-accent: #2563c9;
+  --color-accent-dark: #174ea6;
+  --color-accent-soft: #e1edff;
+  --color-accent-contrast: #ffffff;
+  --color-accent-warm: #d97706;
+  --color-danger: #b54708;
+  --color-hover: #f1eee7;
+  --color-disabled: #e9e3d8;
+  --color-input: #fffefa;
+  --color-table-header: #f2eee5;
+  --color-focus: rgb(37 99 201 / 38%);
+  --color-shadow: rgb(36 41 47 / 8%);
   --font-display: "Segoe UI", sans-serif;
+
+  --bs-body-bg: var(--color-page);
+  --bs-body-color: var(--color-text);
+  --bs-border-color: var(--color-line);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-page: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-muted: #21262d;
+  --color-sidebar: #010409;
+  --color-text: #e6edf3;
+  --color-muted: #9198a1;
+  --color-line: #30363d;
+  --color-accent: #58a6ff;
+  --color-accent-dark: #79b8ff;
+  --color-accent-soft: #172b45;
+  --color-accent-contrast: #0d1117;
+  --color-accent-warm: #f0b44d;
+  --color-danger: #ff7b72;
+  --color-hover: #21262d;
+  --color-disabled: #21262d;
+  --color-input: #0d1117;
+  --color-table-header: #1c2128;
+  --color-focus: rgb(88 166 255 / 45%);
+  --color-shadow: rgb(0 0 0 / 28%);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  background: var(--color-page);
 }
 
 body {
@@ -27,6 +71,7 @@ body {
   background: var(--color-page);
   color: var(--color-text);
   font-family: "Segoe UI", sans-serif;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
 button,
@@ -40,7 +85,7 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid #9aab94;
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
 
@@ -66,8 +111,85 @@ button:focus-visible {
 
 .card-custom {
   border: 1px solid var(--color-line);
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   background: var(--color-surface);
+}
+
+.btn-primary,
+.btn-success {
+  --bs-btn-color: var(--color-accent-contrast);
+  --bs-btn-bg: var(--color-accent);
+  --bs-btn-border-color: var(--color-accent);
+  --bs-btn-hover-color: var(--color-accent-contrast);
+  --bs-btn-hover-bg: var(--color-accent-dark);
+  --bs-btn-hover-border-color: var(--color-accent-dark);
+  --bs-btn-active-color: var(--color-accent-contrast);
+  --bs-btn-active-bg: var(--color-accent-dark);
+  --bs-btn-active-border-color: var(--color-accent-dark);
+}
+
+.btn-dark {
+  --bs-btn-color: var(--color-text);
+  --bs-btn-bg: var(--color-surface-muted);
+  --bs-btn-border-color: var(--color-line);
+  --bs-btn-hover-color: var(--color-text);
+  --bs-btn-hover-bg: var(--color-hover);
+  --bs-btn-hover-border-color: var(--color-accent);
+  --bs-btn-active-color: var(--color-text);
+  --bs-btn-active-bg: var(--color-hover);
+  --bs-btn-active-border-color: var(--color-accent);
+}
+
+.form-control,
+.form-select {
+  border-color: var(--color-line);
+  background-color: var(--color-input);
+  color: var(--color-text);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-accent);
+  background-color: var(--color-input);
+  color: var(--color-text);
+  box-shadow: 0 0 0 0.2rem var(--color-focus);
+}
+
+.form-control::placeholder {
+  color: var(--color-muted);
+  opacity: 0.8;
+}
+
+.table {
+  --bs-table-color: var(--color-text);
+  --bs-table-bg: var(--color-surface);
+  --bs-table-border-color: var(--color-line);
+  --bs-table-striped-bg: var(--color-hover);
+  --bs-table-striped-color: var(--color-text);
+  --bs-table-hover-bg: var(--color-hover);
+  --bs-table-hover-color: var(--color-text);
+}
+
+.modal-content {
+  border-color: var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--color-line);
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.card,
+.list-group-item {
+  border-color: var(--color-line);
+  background-color: var(--color-surface);
+  color: var(--color-text);
 }
 
 @media (max-width: 991.98px) {

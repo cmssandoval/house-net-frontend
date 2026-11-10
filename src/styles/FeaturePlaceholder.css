@@ -44,5 +44,5 @@
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 50%;
-  background: #a4ad9e;
+  background: var(--color-accent-warm);
 }

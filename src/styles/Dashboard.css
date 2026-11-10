@@ -85,10 +85,10 @@
 }
 
 .dashboard-inline-links a {
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 650;
-  text-decoration-color: #9da997;
+  text-decoration-color: var(--color-accent-warm);
   text-underline-offset: 0.25em;
 }
 
@@ -120,8 +120,8 @@
 }
 
 .quick-link-card:hover {
-  border-color: #bdc5b9;
-  background: #fbfaf6;
+  border-color: var(--color-accent);
+  background: var(--color-hover);
 }
 
 .quick-link-kicker {
@@ -163,7 +163,7 @@
 
 .dashboard-note {
   padding: 1.2rem 1.3rem;
-  border-left: 2px solid #c6cbbf;
+  border-left: 2px solid var(--color-accent-warm);
   color: var(--color-muted);
   line-height: 1.6;
 }

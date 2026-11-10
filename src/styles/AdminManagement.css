@@ -19,7 +19,7 @@
 .admin-panel-card {
   min-width: 0;
   padding: clamp(1rem, 2.5vw, 1.6rem);
-  box-shadow: 0 5px 20px rgb(47 53 48 / 4%);
+  box-shadow: 0 5px 20px var(--color-shadow);
 }
 
 .admin-panel-heading {
@@ -76,8 +76,8 @@
 }
 
 .admin-page .form-control:focus {
-  border-color: #9da997;
-  box-shadow: 0 0 0 0.2rem rgb(105 122 104 / 14%);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.2rem var(--color-focus);
 }
 
 .admin-page .btn {
@@ -97,14 +97,14 @@
 }
 
 .admin-page .btn-dark {
-  border-color: #e4e3dc;
-  background: #eeede7;
+  border-color: var(--color-line);
+  background: var(--color-surface-muted);
   color: var(--color-text);
 }
 
 .admin-page .btn-dark:hover {
-  border-color: #d7d8d0;
-  background: #e2e3dc;
+  border-color: var(--color-accent);
+  background: var(--color-hover);
   color: var(--color-text);
 }
 
@@ -139,7 +139,7 @@
 .admin-table thead th {
   padding: 0.9rem 0.85rem;
   border-bottom: 1px solid var(--color-line);
-  background: #f7f6f2;
+  background: var(--color-table-header);
   color: var(--color-muted);
   font-size: 0.76rem;
   font-weight: 650;
@@ -149,7 +149,7 @@
 
 .admin-table tbody td {
   padding: 0.85rem;
-  border-color: #eeede7;
+  border-color: var(--color-line);
   color: var(--color-text);
   text-align: left;
 }
