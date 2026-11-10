@@ -5,7 +5,7 @@ const PublicResources = () => {
     <FeaturePlaceholder
       eyebrow="Para compartir"
       title="Recursos compartidos"
-      description="Un espacio para reunir recursos útiles para todos en casa. Por ahora, todavía no hay nada importante aquí."
+      description="Un espacio para reunir recursos informativos, académicos, y de investigación. Por ahora, todavía no hay nada importante aquí."
     />
   );
 };

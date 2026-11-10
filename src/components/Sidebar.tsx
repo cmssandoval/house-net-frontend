@@ -46,7 +46,6 @@ const Sidebar = () => {
       <aside className="app-sidebar d-none d-lg-flex">
         <div className="sidebar-brand">
           <NavLink to={role === 'guest' ? '/' : '/tablero'}>House Net</NavLink>
-          <span>El hogar, en un solo lugar</span>
         </div>
 
         <nav className="sidebar-links" aria-label="Navegación principal">
@@ -79,7 +78,6 @@ const Sidebar = () => {
             <NavLink className="mobile-brand" to={role === 'guest' ? '/' : '/tablero'}>
               House Net
             </NavLink>
-            <span>El hogar, en un solo lugar</span>
           </div>
           <ThemeToggle />
         </header>
@@ -123,7 +121,7 @@ const Sidebar = () => {
                   ))}
                   {role !== 'guest' && (
                     <button
-                      className="mobile-more-link"
+                      className="mobile-more-link mobile-logout"
                       type="button"
                       onClick={() => {
                         setOpenMorePath(null);
