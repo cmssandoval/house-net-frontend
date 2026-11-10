@@ -77,14 +77,14 @@ const InventoryAdmin = () => {
   };
 
   return (
-    <>
-      <h2 className="ps-2 fw-bold d-inline">Inventory Admin</h2>
-      <Container className='my-4'>
+    <main className="admin-page admin-inventory-page">
+      <h2 className="admin-page-title">Inventory Admin</h2>
+      <Container className="admin-content">
         <Row>
-          <Card className='p-2 card-custom'>
-            <div className='mx-2 mt-3 d-flex align-items-center'>
-              <Card.Title className='p-2 d-inline'>Manejo de tablas</Card.Title>
-              <div className='ms-auto'>
+          <Card className="admin-panel-card card-custom">
+            <div className="admin-panel-heading">
+              <Card.Title className="admin-panel-title">Manejo de tablas</Card.Title>
+              <div className="admin-panel-actions">
                 <Badge
                   className={'mx-2 p-2 ' + (action === 'DELETE' ? 'bg-danger' : 'bg-success')}
                 >{( category || location ) ? action : ''}</Badge>
@@ -95,10 +95,10 @@ const InventoryAdmin = () => {
                 >SEND</Button>
               </div>
             </div>
-            <Form id='inventoryAdminForm' onSubmit={handleSubmit} className='p-3 d-flex flex-column gap-4'>
-              <Form.Group>
+            <Form id='inventoryAdminForm' onSubmit={handleSubmit} className="admin-management-form">
+              <Form.Group className="admin-management-group">
                 <Form.Label className='fw-bold'>+/- Category</Form.Label>
-                <div className='d-flex gap-2'>
+                <div className="admin-management-controls">
                   <Form.Control
                   value={category}
                   disabled={location ? true : false}
@@ -120,9 +120,9 @@ const InventoryAdmin = () => {
                   >🗑️</Button>
                 </div>
               </Form.Group>
-              <Form.Group>
+              <Form.Group className="admin-management-group">
                 <Form.Label className='fw-bold'>+/- Location</Form.Label>
-                <div className='d-flex gap-2'>
+                <div className="admin-management-controls">
                   <Form.Control
                   value={location}
                   disabled={category ? true : false}
@@ -145,8 +145,8 @@ const InventoryAdmin = () => {
                 </div>
               </Form.Group>
             </Form>
-            <Container>
-              <Table responsive className='text-center'>
+            <Container className="admin-table-container">
+              <Table responsive className="admin-table categories-table mb-0">
           <thead>
             <tr>
               <th>ID</th>
@@ -175,7 +175,7 @@ const InventoryAdmin = () => {
           </Card>
         </Row>
       </Container>
-    </>
+    </main>
   );
 };
 

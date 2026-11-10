@@ -43,16 +43,16 @@ const UsersAdmin = () => {
   }, []);
 
   return (
-    <>
-      <h2 className="ps-2 fw-bold d-inline">Inventory Admin</h2>
-      <Container className='my-4'>
+    <main className="admin-page admin-users-page">
+      <h2 className="admin-page-title">Inventory Admin</h2>
+      <Container className="admin-content">
         <Row>
-          <Card className='p-2 card-custom'>
-            <div className='mx-2 mt-3 d-flex align-items-center'>
-              <Card.Title className='p-2 d-inline'>Manejo de usuarios</Card.Title>
+          <Card className="admin-panel-card card-custom">
+            <div className="admin-panel-heading">
+              <Card.Title className="admin-panel-title">Manejo de usuarios</Card.Title>
             </div>
-            <Container>
-              <Table responsive className='text-center'>
+            <Container className="admin-table-container">
+              <Table responsive className="admin-table users-table mb-0">
           <thead>
             <tr>
               <th>ID</th>
@@ -80,7 +80,7 @@ const UsersAdmin = () => {
           </Card>
         </Row>
       </Container>
-    </>
+    </main>
   );
 };
 

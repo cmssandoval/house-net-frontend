@@ -3,15 +3,15 @@ import Card from 'react-bootstrap/Card';
 
 const AdminDashboard = () => {
   return (
-    <>
-      <Container className='px-1 px-lg-5 mt-3'>
-        <Card className='p-4 card-custom gap-2'>
-          <h2>AdminDashboard</h2>
+    <main className="admin-page admin-dashboard">
+      <Container className="admin-content">
+        <Card className="admin-panel-card card-custom">
+          <h2 className="admin-page-title">AdminDashboard</h2>
           <p>Aquí encontrarás herramientas para mantener y configurar el sistema de House Net</p>
           <p>Mientras, puedes visitar otras secciones disponibles en el menú</p>
         </Card>
       </Container>
-    </>
+    </main>
   );
 };
 
