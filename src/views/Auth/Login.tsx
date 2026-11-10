@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiClient from '@/config/axiosConfig.ts';
 import { useAuth } from '@/contexts/AuthContext.ts';
-import LoginForm from '@/components/Forms/LoginForm';
+import LoginForm from '@/components/Auth/LoginForm';
 import type { LoginFormData } from '@/schemas/login.ts';
 
 const Login = () => {
