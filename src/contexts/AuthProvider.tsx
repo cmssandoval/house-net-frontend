@@ -15,30 +15,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     isLoading: true,
   });
 
-    const fetchMe = useCallback(async () => {
+  useEffect(() => {
+    let ignore = false;
+    const fetchMe = async () => {
       try {
         const response = await apiClient.get<{ user: UserInfo | null }>('/auth/me');
-        const { user } = response.data;
-        setAuthState({ user, isLoading: false });
+        if (!ignore) {
+          const { user } = response.data;
+          setAuthState({ user, isLoading: false });
+        }
       } catch (error) {
-        console.error("Error verificando sesión:", error);
-        setAuthState({ user: null, isLoading: false });
+        if (!ignore) {
+          console.error("Error verificando sesión:", error);
+          setAuthState({ user: null, isLoading: false });
+        }
       }
-    }, []);
+    };
 
-  useEffect(() => { fetchMe(); }, [fetchMe]);
+    fetchMe();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
-  const login = async () => {
+  const checkAuth = useCallback(async () => {
     setAuthState((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await apiClient.get('/auth/me');
-      setAuthState({ user: response.data.user, isLoading: false });
-      await fetchMe();
+      const response = await apiClient.get<{ user: UserInfo | null }>('/auth/me');
+      const { user } = response.data;
+      setAuthState({ user, isLoading: false });
     } catch (error) {
       console.error("Error en login:", error);
       setAuthState({ user: null, isLoading: false });
     }
-  };
+  }, []);
 
   const logout = async () => {
     setAuthState((prev) => ({ ...prev, isLoading: true }));
@@ -63,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         user: authState.user,
         role,
         isLoading: authState.isLoading,
-        login,
+        checkAuth,
         logout
       }}>
         {children}

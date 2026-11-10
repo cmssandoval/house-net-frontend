@@ -1,0 +1,22 @@
+.admin-page {
+  width: min(100%, 1220px);
+  margin: 0 auto;
+}
+
+.admin-page-title {
+  margin: 0 0 1.4rem;
+  color: var(--color-text);
+  font-size: clamp(1.75rem, 3vw, 2.3rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.admin-content {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-content > .row {
+  --bs-gutter-x: 0;
+}

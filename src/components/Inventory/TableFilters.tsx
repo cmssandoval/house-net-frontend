@@ -1,13 +1,13 @@
 import Form from 'react-bootstrap/Form';
-import type { Filter, TableFiltersProps } from '@/types/inventory.ts';
+import type { TableFiltersProps } from '@/types/inventory.ts';
 
 const TableFilters = ({ filters, filter, onChange }: TableFiltersProps) => {
   return (
     <Form.Select
       name='filter'
       value={ filter }
-      onChange={( event ) => onChange( event.target.value as Filter )}
-      className="d-inline w-auto shadow-sm"
+      onChange={( event ) => onChange(event.target.value)}
+      className="inventory-filter-select"
       aria-label="Seleccionar filtro"
     >
       {filters.map(( filter ) => (
