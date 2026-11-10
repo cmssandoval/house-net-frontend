@@ -4,6 +4,7 @@ import type { Role } from "@/types/auth";
 import Home from '@/views/Auth/Home';
 import Login from '@/views/Auth/Login';
 import Register from '@/views/Auth/Register';
+import NotFound from '@/views/Public/NotFound';
 import PublicResources from '@/views/Public/PublicResources';
 import Dashboard from '@/views/Private/Dashboard';
 import Inventory from '@/views/Private/Inventory';
@@ -18,9 +19,8 @@ export interface AppRoute {
   path: string;
   label: string;
   roles: Role[];
+  navigationRoles?: Role[];
   element: ReactElement;
-  disabled?: boolean;
-  hidden?: boolean;
   mobileTab?: boolean;
 }
 
@@ -36,10 +36,23 @@ const appRoutes: AppRoute[] = [
   { path: '/public-tools', label: 'Herramientas', roles: ['admin', 'user', 'guest'], element: <Tools />, mobileTab: true },
 
   { path: '/admin', label: 'Administración', roles: ['admin'], element: <AdminDashboard /> },
-  { path: '/admin/inventory', label: '$INVENTORY', roles: ['admin'], element: <InventoryAdmin />, hidden: true },
-  { path: '/admin/users', label: '$USER', roles: ['admin'], element: <UsersAdmin />, hidden: true },
+  {
+    path: '/admin/inventory',
+    label: 'Categorías y ubicaciones',
+    roles: ['admin'],
+    navigationRoles: ['admin'],
+    element: <InventoryAdmin />,
+  },
+  {
+    path: '/admin/users',
+    label: 'Usuarios',
+    roles: ['admin'],
+    navigationRoles: ['admin'],
+    element: <UsersAdmin />,
+  },
 
   { path: '/public-resources', label: 'Recursos', roles: ['admin', 'user', 'guest'], element: <PublicResources />, mobileTab: true },
+  { path: '*', label: 'No encontrado', roles: ['admin', 'user', 'guest'], navigationRoles: [], element: <NotFound /> },
 ];
 
 export default appRoutes;

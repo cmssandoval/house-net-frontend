@@ -33,13 +33,16 @@ const Sidebar = () => {
   const { role, logout } = useAuth();
   const { pathname } = useLocation();
   const [openMorePath, setOpenMorePath] = useState<string | null>(null);
-  const allowedRoutes = appRoutes.filter((route) => route.roles.includes(role) && !route.hidden);
-  const mobileTabs = allowedRoutes.filter((route) => route.mobileTab);
-  const moreRoutes = allowedRoutes.filter((route) => !route.mobileTab);
-  const moreOpen = openMorePath === pathname;
-  const moreIsActive = allowedRoutes.some(
+  const navigationRoutes = appRoutes.filter(
     (route) =>
-      !route.mobileTab &&
+      route.roles.includes(role) &&
+      (route.navigationRoles ?? route.roles).includes(role),
+  );
+  const mobileTabs = navigationRoutes.filter((route) => route.mobileTab);
+  const moreRoutes = navigationRoutes.filter((route) => !route.mobileTab);
+  const moreOpen = openMorePath === pathname;
+  const moreIsActive = moreRoutes.some(
+    (route) =>
       (pathname === route.path || pathname.startsWith(`${route.path}/`)),
   );
 
@@ -52,7 +55,7 @@ const Sidebar = () => {
         </div>
 
         <nav className="sidebar-links" aria-label="Navegación principal">
-          {allowedRoutes.map((route) => (
+          {navigationRoutes.map((route) => (
             <NavLink
               key={route.path}
               to={route.path}
