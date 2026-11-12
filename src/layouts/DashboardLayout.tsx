@@ -1,22 +1,14 @@
 import { Outlet } from 'react-router-dom';
-
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-
 import Sidebar from '@/components/Sidebar.tsx';
 
 const DashboardLayout = () => {
-
   return (
-    <Container fluid>
-      <Row>
-        <Sidebar />
-        <Col xs={12} lg={9} xl={9} className="p-4 px-lg-5">
-          <Outlet />
-        </Col>
-      </Row>
-    </Container>
+    <div className="app-shell">
+      <Sidebar />
+      <main className="app-main">
+        <Outlet />
+      </main>
+    </div>
   );
 };
 

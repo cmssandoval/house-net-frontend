@@ -1,0 +1,246 @@
+.inventory-page {
+  width: min(100%, 1220px);
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.inventory-heading {
+  margin-bottom: 1.6rem;
+}
+
+.inventory-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.inventory-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.inventory-filter-select {
+  width: auto;
+  min-width: 10.5rem;
+  border-color: var(--color-line);
+  border-radius: 0.75rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: none;
+}
+
+.inventory-filter-select:focus,
+.inventory-search-group .form-control:focus,
+.inventory-modal-content .form-control:focus,
+.inventory-modal-content .form-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.2rem var(--color-focus);
+}
+
+.inventory-controls {
+  display: flex;
+  min-width: min(100%, 32rem);
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+.inventory-search-form {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.inventory-search-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.inventory-search-group .form-control,
+.inventory-modal-content .form-control,
+.inventory-modal-content .form-select {
+  min-height: 2.7rem;
+  border-color: var(--color-line);
+  border-radius: 0.75rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: none;
+}
+
+.inventory-search-button,
+.inventory-add-button {
+  min-height: 2.7rem;
+  padding-inline: 1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 0.75rem;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-weight: 600;
+}
+
+.inventory-search-button:hover,
+.inventory-add-button:hover {
+  border-color: var(--color-accent-dark);
+  background: var(--color-accent-dark);
+  color: var(--color-accent-contrast);
+}
+
+.inventory-content {
+  min-width: 0;
+}
+
+.inventory-table-row {
+  margin: 0;
+}
+
+.inventory-table-card {
+  overflow: hidden;
+  padding: 0.45rem 1rem;
+  border-color: var(--color-line);
+  box-shadow: 0 5px 20px var(--color-shadow);
+}
+
+.inventory-table-card .table-responsive {
+  border-radius: 0.6rem;
+}
+
+.inventory-table {
+  min-width: 620px;
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.inventory-table thead th {
+  padding: 1rem 0.85rem;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  font-weight: 650;
+  text-align: left;
+}
+
+.inventory-table tbody td {
+  padding: 0.95rem 0.85rem;
+  border-color: var(--color-line);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.inventory-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.inventory-table-empty {
+  height: 6rem;
+  color: var(--color-muted) !important;
+  text-align: center !important;
+}
+
+.inventory-product-image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.6rem;
+  object-fit: cover;
+}
+
+.inventory-image-placeholder {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.inventory-modal-content {
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  background: var(--color-surface);
+}
+
+.inventory-modal-header,
+.inventory-modal-footer {
+  border-color: var(--color-line);
+}
+
+.inventory-modal-header .modal-title {
+  color: var(--color-text);
+  font-weight: 650;
+}
+
+.inventory-modal-content .form-label {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.inventory-modal-selects,
+.inventory-modal-numbers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.inventory-modal-numbers > div {
+  min-width: 0;
+}
+
+.inventory-modal-footer .btn {
+  min-height: 2.55rem;
+  border-radius: 0.7rem;
+  font-weight: 600;
+}
+
+.inventory-modal-footer .btn-success {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.inventory-modal-footer .btn-success:hover {
+  border-color: var(--color-accent-dark);
+  background: var(--color-accent-dark);
+}
+
+@media (max-width: 760px) {
+  .inventory-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .inventory-filter-select {
+    width: 100%;
+  }
+
+  .inventory-controls {
+    min-width: 0;
+    justify-content: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .inventory-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .inventory-search-form {
+    flex-basis: auto;
+  }
+
+  .inventory-search-group .form-control,
+  .inventory-search-button,
+  .inventory-add-button {
+    min-height: 2.9rem;
+  }
+
+  .inventory-add-button {
+    width: 100%;
+  }
+
+  .inventory-modal-selects,
+  .inventory-modal-numbers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

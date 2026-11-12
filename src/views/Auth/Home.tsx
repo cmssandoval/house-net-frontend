@@ -12,7 +12,10 @@ const Home = () => {
       <p>
         <Link to='/register'>Regístrate</Link> o <Link to='/login'> Inicia sesión</Link> para acceder a las funciones de la casa.
         </p>
-      <p>También puedes leer <Link to='/public-resources'>los recursos públicos</Link>.</p>
+      <p>
+        Explora <Link to='/public-tools'>las herramientas</Link> y{' '}
+        <Link to='/public-resources'>los recursos compartidos</Link>.
+      </p>
     </Card>
   );
 };

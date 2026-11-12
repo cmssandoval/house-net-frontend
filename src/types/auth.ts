@@ -18,6 +18,6 @@ export interface AuthContextType {
   user: UserInfo | null;
   role: Role;
   isLoading: boolean;
-  login: () => Promise<void>;
+  checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
 }

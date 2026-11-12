@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiClient from '@/config/axiosConfig.ts';
 import { useNavigate } from 'react-router-dom';
-import RegisterForm from '@/components/Forms/RegisterForm';
+import RegisterForm from '@/components/Auth/RegisterForm';
 import type { RegisterSubmitData } from '@/schemas/register.ts';
 
 const Register = () => {
